@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculatorapp.databinding.ActivityHistoryBinding
 
+/**
+ * Класс экрана Истории
+ */
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
 
@@ -13,12 +16,16 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadAndShowHistory()
+
         binding.btnDeleteHistory.setOnClickListener {
             clearHistory()
         }
     }
 
-    private fun loadAndShowHistory(){
+    /**
+     * Функция для загрузки и отображения истории из sharedpreferences
+     */
+    private fun loadAndShowHistory() {
         val prefs = getSharedPreferences("calculator_prefs", MODE_PRIVATE)
         val historyString = prefs.getString("history", "") ?: ""
         val historyList = if (historyString.isNotEmpty()) {
@@ -28,6 +35,9 @@ class HistoryActivity : AppCompatActivity() {
         }
         binding.tvHistory.text = historyList.joinToString("\n\n")
     }
+    /**
+     * Функция для очистки истории
+     */
     private fun clearHistory() {
         val prefs = getSharedPreferences("calculator_prefs", MODE_PRIVATE)
         val editor = prefs.edit()

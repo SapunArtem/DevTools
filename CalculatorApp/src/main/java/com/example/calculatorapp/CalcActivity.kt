@@ -5,9 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculatorapp.databinding.ActivityCalculatorBinding
 
+/**
+ * Класс экрана калькулятора
+ */
 class CalcActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalculatorBinding
     private val calculator = Calculator()
+    private var lastResult = ""
     private val calculationHistory = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,70 +19,75 @@ class CalcActivity : AppCompatActivity() {
         binding = ActivityCalculatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         setupNumberButtons()
         setupOperationButtons()
         setupOtherButtons()
         loadHistory()
-
-
     }
 
-
-    private fun setupNumberButtons(){
-       with(binding){
-           listOf(
-               btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9
-           ).forEach{button->
-               button.setOnClickListener {
-                   updateDisplay(calculator.processInput(button.text.toString()))
-               }
-           }
-       }
-    }
-
-    private fun setupOperationButtons(){
-        with(binding){
+    /**
+     * Функция необходим для обработки кнопок чисел
+     */
+    private fun setupNumberButtons() {
+        with(binding) {
             listOf(
-                btnMinus,btnMinus,btnDivision,btnMultiplication,btnPlus
-            ).forEach{button->
+                btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9
+            ).forEach { button ->
                 button.setOnClickListener {
-                    when(button){
-                        btnMinus -> updateDisplay(calculator.processInput("-"))
-                        btnProcent ->  updateDisplay(calculator.processInput("%"))
-                        btnDivision ->  updateDisplay(calculator.processInput("/"))
-                        btnMultiplication ->  updateDisplay(calculator.processInput("*"))
-                        btnPlus ->  updateDisplay(calculator.processInput("+"))
-                    }
+                    updateDisplay(calculator.processInput(button.text.toString()))
                 }
             }
         }
     }
 
-    private fun setupOtherButtons(){
-        with(binding){
+    /**
+     * Функция необходим для обработки кнопок математичесских символов
+     */
+    private fun setupOperationButtons() {
+        with(binding) {
             listOf(
-                btnAC,btnDel,btnComma,btnEquals,btnHistory
-            ).forEach{button->
+                btnMinus, btnMinus, btnDivision, btnMultiplication, btnPlus
+            ).forEach { button ->
                 button.setOnClickListener {
-                    when(button){
+                    when (button) {
+                        btnMinus -> updateDisplay(calculator.processInput("-"))
+                        btnProcent -> updateDisplay(calculator.processInput("%"))
+                        btnDivision -> updateDisplay(calculator.processInput("/"))
+                        btnMultiplication -> updateDisplay(calculator.processInput("*"))
+                        btnPlus -> updateDisplay(calculator.processInput("+"))
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Функция необходим для обработки кнопок : History,AC,Del,Comma,Equals
+     */
+    private fun setupOtherButtons() {
+        with(binding) {
+            listOf(
+                btnAC, btnDel, btnComma, btnEquals, btnHistory
+            ).forEach { button ->
+                button.setOnClickListener {
+                    when (button) {
                         btnAC -> updateDisplay(calculator.processInput("AC"))
                         btnDel -> updateDisplay(calculator.processInput("DEL"))
                         btnComma -> updateDisplay(calculator.processInput("."))
-                        btnEquals ->{
+                        btnEquals -> {
                             val result = calculator.processInput("=")
                             calculationHistory.add("${tvOperation.text} = $result")
+                            lastResult = result
                             updateDisplay(result)
                             saveHistory()
                             tvAnswer.textSize = 45F
                             tvOperation.textSize = 25F
                         }
+
                         btnHistory -> {
                             btnHistory.setOnClickListener {
                                 val intent = Intent(
-                                    this@CalcActivity,HistoryActivity::class.java)
-                                    /*intent.putStringArrayListExtra(
-                                    "Extra_Answer", ArrayList(calculationHistory))*/
+                                    this@CalcActivity, HistoryActivity::class.java
+                                )
                                 startActivity(intent)
                             }
                         }
@@ -88,17 +97,23 @@ class CalcActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateDisplay(text: String){
+    /**
+     * Функция необходим для обновления данных в строке вывода и ответа
+     */
+    private fun updateDisplay(text: String) {
 
-       with(binding){
-           tvOperation.text = text
-           if (text=="") tvAnswer.text = "" else tvAnswer.text = "=$text"
-           tvOperation.textSize =45F
-           tvAnswer.textSize =25F
+        with(binding) {
+            tvOperation.text = text
+            if (text == "") tvAnswer.text = "" else tvAnswer.text = "=$text"
+                tvOperation.textSize = 45F
+                tvAnswer.textSize = 25F
 
-       }
 
+        }
     }
+    /**
+     * Функция необходим для загрузки данных в SharedPreferences
+     */
     private fun saveHistory() {
         val prefs = getSharedPreferences("calculator_prefs", MODE_PRIVATE)
         val editor = prefs.edit()
@@ -106,6 +121,10 @@ class CalcActivity : AppCompatActivity() {
         editor.putString("history", historyString)
         editor.apply()
     }
+
+    /**
+     * Класс необходим для загрузки данных из SharedPreferences
+     */
     private fun loadHistory() {
         val prefs = getSharedPreferences("calculator_prefs", MODE_PRIVATE)
         val historyString = prefs.getString("history", "") ?: ""
@@ -117,4 +136,4 @@ class CalcActivity : AppCompatActivity() {
     }
 
 
-    }
+}

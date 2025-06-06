@@ -4,8 +4,11 @@ class Calculator {
     private var currentInput = StringBuilder()
     private var lastNumber = false
 
-
-     fun processInput(input: String): String {
+    /**
+     * Функция для обработки введенных пользователем символов
+     * @param input передается из CalcActivity.kt
+     */
+    fun processInput(input: String): String {
         return when (input) {
             "AC" -> clear()
             "DEL" -> deleteLastChar()
@@ -22,13 +25,17 @@ class Calculator {
             }
         }
     }
-
-
+    /**
+     * Функция для очистки экрана ввода и ответа
+     */
     private fun clear(): String {
         currentInput.clear()
         return currentInput.toString()
     }
 
+    /**
+     * Функция для удаления последнего введенного символа
+     */
     private fun deleteLastChar(): String {
         if (currentInput.isNotEmpty()) {
             currentInput.deleteCharAt(currentInput.length - 1)
@@ -36,6 +43,9 @@ class Calculator {
         return currentInput.toString()
     }
 
+    /**
+     * Функция для обработки математических выражений
+     */
     private fun calculate(): String {
         val split = currentInput.split(Regex("(?<=[+\\-*/])|(?=[+\\-*/])"))
             .filter { it.isNotEmpty() }
@@ -46,7 +56,7 @@ class Calculator {
                 "*", "/", "-", "+" -> tokens.add(element)
                 else -> if (element.contains(".")) {
                     tokens.add(element.toDouble())
-                }else{
+                } else {
                     tokens.add(element.toInt())
                 }
 
@@ -62,33 +72,35 @@ class Calculator {
                     val prev = highPriority.removeLastOrNull() as Number
                     val next = tokens[i + 1] as Number
                     val result = when (token) {
-                        "*" -> if (prev is Double || next is Double){
+                        "*" -> if (prev is Double || next is Double) {
                             prev.toDouble() * next.toDouble()
-                        }else{
+                        } else {
                             prev.toInt() * next.toInt()
                         }
 
                         "/" -> {
                             try {
-                                if (next == 0 ) throw ArithmeticException("Деление на ноль")
-                                if (prev is Double || next is Double){
+                                if (next == 0) throw ArithmeticException("Деление на ноль")
+                                if (prev is Double || next is Double) {
                                     prev.toDouble() / next.toDouble()
-                                }else{
-                                    if (prev.toInt()/next.toInt()!=0){
+                                } else {
+                                    if (prev.toInt() / next.toInt() != 0) {
                                         prev.toDouble() / next.toDouble()
-                                    }else{
-                                        prev.toInt()/next.toInt()
+                                    } else {
+                                        prev.toInt() / next.toInt()
                                     }
                                 }
                             } catch (e: ArithmeticException) {
                                 return "Ошибка: ${e.message}"
                             }
                         }
+
                         else -> throw IllegalStateException()
                     }
                     highPriority.add(result)
                     i++
                 }
+
                 else -> highPriority.add(token)
             }
             i++
@@ -105,6 +117,7 @@ class Calculator {
                         else -> result.toInt() + next.toInt()
                     }
                 }
+
                 "-" -> {
                     val next = highPriority[i + 1] as Number
                     result = when {
@@ -122,22 +135,34 @@ class Calculator {
         }
     }
 
+    /**
+     * Функция для добавления точки
+     */
     private fun addComma(): String {
         if (lastNumber) currentInput.append(".")
         lastNumber = false
         return currentInput.toString()
     }
 
+    /**
+     * Функция для добавления цифр
+     * @param number передает числа в виде String
+     */
     private fun addNumber(number: String): String {
         currentInput.append(number)
         lastNumber = true
         return currentInput.toString()
     }
 
+    /**
+     * Функция для добавления математических операндов
+     * @param operation передает математические символы в виде String
+     */
     private fun addOperation(operation: String): String {
         if (lastNumber) currentInput.append(operation)
         lastNumber = false
         return currentInput.toString()
     }
+
 
 }
