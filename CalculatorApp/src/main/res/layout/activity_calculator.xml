@@ -8,6 +8,7 @@
     android:background="@color/grey"
     tools:context=".CalcActivity">
 
+
     <TextView
         android:id="@+id/tvOperation"
         android:layout_width="0dp"
@@ -304,6 +305,13 @@
         app:layout_constraintBottom_toTopOf="@+id/tvOperation"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnHistory"
+        style="@style/btnHistoryStyle"
+        android:text="@string/history"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

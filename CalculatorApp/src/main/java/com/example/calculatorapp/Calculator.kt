@@ -23,6 +23,7 @@ class Calculator {
         }
     }
 
+
     private fun clear(): String {
         currentInput.clear()
         return currentInput.toString()
@@ -34,7 +35,6 @@ class Calculator {
         }
         return currentInput.toString()
     }
-
 
     private fun calculate(): String {
         val split = currentInput.split(Regex("(?<=[+\\-*/])|(?=[+\\-*/])"))

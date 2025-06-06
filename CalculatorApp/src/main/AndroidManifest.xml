@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DevTools">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".CalcActivity"
             android:exported="true">
             <intent-filter>
