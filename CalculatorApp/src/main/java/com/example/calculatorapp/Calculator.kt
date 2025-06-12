@@ -25,6 +25,7 @@ class Calculator {
             }
         }
     }
+
     /**
      * Функция для очистки экрана ввода и ответа
      */
@@ -57,7 +58,7 @@ class Calculator {
                 else -> if (element.contains(".")) {
                     tokens.add(element.toDouble())
                 } else {
-                    tokens.add(element.toInt())
+                    tokens.add(element.toDouble())
                 }
 
             }
@@ -69,27 +70,14 @@ class Calculator {
             when (val token = tokens[i]) {
                 is Int -> highPriority.add(token)
                 "*", "/" -> {
-                    val prev = highPriority.removeLastOrNull() as Number
-                    val next = tokens[i + 1] as Number
+                    val prev = highPriority.removeLastOrNull() as Double
+                    val next = tokens[i + 1] as Double
                     val result = when (token) {
-                        "*" -> if (prev is Double || next is Double) {
-                            prev.toDouble() * next.toDouble()
-                        } else {
-                            prev.toInt() * next.toInt()
-                        }
-
+                        "*" -> prev * next
                         "/" -> {
                             try {
-                                if (next == 0) throw ArithmeticException("Деление на ноль")
-                                if (prev is Double || next is Double) {
-                                    prev.toDouble() / next.toDouble()
-                                } else {
-                                    if (prev.toInt() / next.toInt() != 0) {
-                                        prev.toDouble() / next.toDouble()
-                                    } else {
-                                        prev.toInt() / next.toInt()
-                                    }
-                                }
+                                if (next == 0.0) throw ArithmeticException("Деление на ноль")
+                                prev / next
                             } catch (e: ArithmeticException) {
                                 return "Ошибка: ${e.message}"
                             }
@@ -106,33 +94,25 @@ class Calculator {
             i++
         }
 
-        var result: Number = highPriority[0] as? Int ?: (highPriority[0] as Double)
+        var result: Double = highPriority[0] as Double
         i = 1
         while (i < highPriority.size) {
             when (highPriority[i]) {
                 "+" -> {
-                    val next = highPriority[i + 1] as Number
-                    result = when {
-                        result is Double || next is Double -> result.toDouble() + next.toDouble()
-                        else -> result.toInt() + next.toInt()
-                    }
+                    val next = highPriority[i + 1] as Double
+                    result += next
+
                 }
 
                 "-" -> {
-                    val next = highPriority[i + 1] as Number
-                    result = when {
-                        result is Double || next is Double -> result.toDouble() - next.toDouble()
-                        else -> result.toInt() - next.toInt()
-                    }
+                    val next = highPriority[i + 1] as Double
+                    result -= next
                 }
             }
             i += 2
         }
 
-        return when (result) {
-            is Double -> if (result % 1.0 == 0.0) result.toInt().toString() else result.toString()
-            else -> result.toString()
-        }
+        return if (result % 1.0 == 0.0) result.toInt().toString() else result.toString()
     }
 
     /**
