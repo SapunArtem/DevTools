@@ -1,6 +1,5 @@
 package com.example.calculatorapp
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculatorapp.databinding.ActivityCalculatorBinding
@@ -84,18 +83,21 @@ class CalcActivity : AppCompatActivity() {
                         }
 
                         btnHistory -> {
-                            btnHistory.setOnClickListener {
-                                val intent = Intent(
+                                /*val intent = Intent(
                                     this@CalcActivity, HistoryActivity::class.java
                                 )
-                                startActivity(intent)
+                                startActivity(intent)*/
+                                supportFragmentManager.beginTransaction()
+                                    .replace(R.id.historyFragmentConteiner,HistoryFragment())
+                                    .addToBackStack(null)
+                                    .commit()
                             }
                         }
                     }
                 }
             }
         }
-    }
+
 
     /**
      * Функция необходим для обновления данных в строке вывода и ответа
@@ -104,7 +106,10 @@ class CalcActivity : AppCompatActivity() {
 
         with(binding) {
             tvOperation.text = text
-            if (text == "") tvAnswer.text = "" else tvAnswer.text = "=$text"
+            if (text == "") {
+                tvAnswer.text = ""
+            } else tvAnswer.text = "=$text"
+
                 tvOperation.textSize = 45F
                 tvAnswer.textSize = 25F
 
