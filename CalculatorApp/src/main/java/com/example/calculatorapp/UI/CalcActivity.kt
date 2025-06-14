@@ -1,7 +1,9 @@
-package com.example.calculatorapp
+package com.example.calculatorapp.UI
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.calculatorapp.Calculator
+import com.example.calculatorapp.R
 import com.example.calculatorapp.databinding.ActivityCalculatorBinding
 
 /**
@@ -45,7 +47,7 @@ class CalcActivity : AppCompatActivity() {
     private fun setupOperationButtons() {
         with(binding) {
             listOf(
-                btnMinus, btnMinus, btnDivision, btnMultiplication, btnPlus
+                btnMinus, btnDivision, btnMultiplication, btnPlus
             ).forEach { button ->
                 button.setOnClickListener {
                     when (button) {
@@ -88,7 +90,7 @@ class CalcActivity : AppCompatActivity() {
                                 )
                                 startActivity(intent)*/
                                 supportFragmentManager.beginTransaction()
-                                    .replace(R.id.historyFragmentConteiner,HistoryFragment())
+                                    .replace(R.id.historyFragmentConteiner, HistoryFragment())
                                     .addToBackStack(null)
                                     .commit()
                             }
@@ -108,7 +110,9 @@ class CalcActivity : AppCompatActivity() {
             tvOperation.text = text
             if (text == "") {
                 tvAnswer.text = ""
-            } else tvAnswer.text = "=$text"
+            } else {
+                tvAnswer.text = "=$text"
+            }
 
                 tvOperation.textSize = 45F
                 tvAnswer.textSize = 25F

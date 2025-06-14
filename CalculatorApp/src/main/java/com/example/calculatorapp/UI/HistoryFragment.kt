@@ -1,4 +1,4 @@
-package com.example.calculatorapp
+package com.example.calculatorapp.UI
 
 import android.content.SharedPreferences
 import android.os.Bundle
