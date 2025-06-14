@@ -27,7 +27,22 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpButtons()
 
+    }
+
+    private fun setUpButtons(){
+        with(binding){
+            listOf(
+                btnBack
+            ).forEach{button ->
+                button.setOnClickListener {
+                    when(button){
+                        btnBack ->  parentFragmentManager.popBackStack()
+                    }
+                }
+            }
+        }
     }
 
 
