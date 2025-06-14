@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".UI.ProfileFragment">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="ivProfile,tvPatronymic,tvLastName,tvFirstName" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="ivProfile,tvNickName" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolProfile"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/grey"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/back_btn" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ivProfile"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:cardCornerRadius="120dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/barrier2">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile"
+            tools:layout_editor_absoluteX="17dp"
+            tools:layout_editor_absoluteY="414dp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvFirstName"
+        style="@style/TextStyle"
+        android:layout_marginTop="10dp"
+        android:text="Имя"
+        app:layout_constraintEnd_toEndOf="@id/barrier1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/tvLastName" />
+
+    <TextView
+        android:id="@+id/tvLastName"
+        style="@style/TextStyle"
+        android:layout_marginTop="50dp"
+        android:text="Фамилия"
+        app:layout_constraintEnd_toEndOf="@id/barrier1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/barrier2" />
+
+    <TextView
+        android:id="@+id/tvPatronymic"
+        style="@style/TextStyle"
+        android:layout_marginTop="10dp"
+        android:text="Отчество"
+        app:layout_constraintEnd_toEndOf="@id/barrier1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/tvFirstName" />
+
+    <TextView
+        android:id="@+id/inputFirstName"
+        style="@style/TextInputStyle"
+        android:layout_marginTop="10dp"
+        android:text="Артем"
+        app:layout_constraintTop_toBottomOf="@+id/inputSecondName"
+        app:layout_constraintStart_toEndOf="@id/barrier1" />
+
+    <TextView
+        android:id="@+id/inputSecondName"
+        style="@style/TextInputStyle"
+        android:layout_marginTop="48dp"
+        android:text="Сапун"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/barrier1"
+        app:layout_constraintTop_toTopOf="@+id/barrier2" />
+
+    <TextView
+        android:id="@+id/inputPatronymic"
+        style="@style/TextInputStyle"
+        android:layout_marginTop="10dp"
+        android:text="Николаевич"
+        app:layout_constraintStart_toEndOf="@id/barrier1"
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstName" />
+
+    <TextView
+        android:id="@+id/tvNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SapunArtem"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/barrier1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
