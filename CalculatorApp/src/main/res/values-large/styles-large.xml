@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="btnHistoryStyleLarge">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/shape_btn</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="btnStyle_large">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/shape_btn</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="equalsBtnStyleLarge" parent="btnStyle_large">
+        <item name="android:background">@drawable/shape_btn_equals</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="btnActionsStyleLarge" parent="btnStyle_large">
+        <item name="android:background">@drawable/shape_btn</item>
+        <item name="android:textColor">@color/orange</item>
+
+    </style>
+
+    <style name="TextStyle" >
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextInputStyle" >
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:titleMarginStart">20dp</item>
+
+    </style>
+</resources>

@@ -67,7 +67,7 @@ class CalcActivity : AppCompatActivity() {
     private fun setupOtherButtons() {
         with(binding) {
             listOf(
-                btnAC, btnDel, btnComma, btnEquals, btnHistory
+                btnAC, btnDel, btnComma, btnEquals, btnHistory,btnProfile
             ).forEach { button ->
                 button.setOnClickListener {
                     when (button) {
@@ -83,17 +83,18 @@ class CalcActivity : AppCompatActivity() {
                             tvAnswer.textSize = 45F
                             tvOperation.textSize = 25F
                         }
-
                         btnHistory -> {
-                                /*val intent = Intent(
-                                    this@CalcActivity, HistoryActivity::class.java
-                                )
-                                startActivity(intent)*/
                                 supportFragmentManager.beginTransaction()
-                                    .replace(R.id.historyFragmentConteiner, HistoryFragment())
+                                    .replace(R.id.FragmentConteiner, HistoryFragment())
                                     .addToBackStack(null)
                                     .commit()
                             }
+                        btnProfile ->{
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.FragmentConteiner, ProfileFragment())
+                                .addToBackStack(null)
+                                .commit()
+                        }
                         }
                     }
                 }
