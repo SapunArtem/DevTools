@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:textAlignment="viewEnd"
-        android:textSize="40sp"
+        android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -51,7 +51,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAC"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/ac"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/btn7"
@@ -63,7 +63,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn7"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/seven"
         app:layout_constraintBottom_toTopOf="@+id/btn4"
         app:layout_constraintEnd_toStartOf="@+id/btn8"
@@ -74,7 +74,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDivision"
-        style="@style/btnActionsStyle"
+        style="@style/btnActionsStyleLarge"
         android:text="@string/division"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/btnMultiplication"
@@ -86,7 +86,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnProcent"
-        style="@style/btnActionsStyle"
+        style="@style/btnActionsStyleLarge"
         android:text="@string/procent"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/btn9"
@@ -128,7 +128,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEquals"
-        style="@style/equalsBtnStyle"
+        style="@style/equalsBtnStyleLarge"
         android:text="@string/equals"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
@@ -139,7 +139,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPlus"
-        style="@style/btnActionsStyle"
+        style="@style/btnActionsStyleLarge"
         android:text="@string/plus"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/btnEquals"
@@ -151,7 +151,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMinus"
-        style="@style/btnActionsStyle"
+        style="@style/btnActionsStyleLarge"
         android:text="@string/minus"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/btnPlus"
@@ -163,7 +163,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMultiplication"
-        style="@style/btnActionsStyle"
+        style="@style/btnActionsStyleLarge"
         android:text="@string/miltiplicate"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/btnMinus"
@@ -175,7 +175,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnComma"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/comma"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/btnEquals"
@@ -186,7 +186,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn3"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/three"
         app:layout_constraintBottom_toTopOf="@+id/btnComma"
         app:layout_constraintEnd_toStartOf="@+id/btnPlus"
@@ -197,7 +197,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn6"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/six"
         app:layout_constraintBottom_toTopOf="@+id/btn3"
         app:layout_constraintEnd_toStartOf="@+id/btnMinus"
@@ -208,7 +208,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn9"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/nine"
         app:layout_constraintBottom_toTopOf="@+id/btn6"
         app:layout_constraintEnd_toStartOf="@+id/btnMultiplication"
@@ -219,7 +219,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn0"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/zero"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/btnComma"
@@ -230,7 +230,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn2"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/two"
         app:layout_constraintBottom_toTopOf="@+id/btn0"
         app:layout_constraintEnd_toStartOf="@+id/btn3"
@@ -241,7 +241,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn5"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/five"
         app:layout_constraintBottom_toTopOf="@+id/btn2"
         app:layout_constraintEnd_toStartOf="@+id/btn6"
@@ -252,7 +252,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn8"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/eight"
         app:layout_constraintBottom_toTopOf="@+id/btn5"
         app:layout_constraintEnd_toStartOf="@+id/btn9"
@@ -263,7 +263,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEmpty"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/btn0"
         app:layout_constraintHorizontal_bias="0.5"
@@ -273,7 +273,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn1"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/one"
         app:layout_constraintBottom_toTopOf="@+id/btnEmpty"
         app:layout_constraintEnd_toStartOf="@+id/btn2"
@@ -284,7 +284,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn4"
-        style="@style/btnStyle"
+        style="@style/btnStyle_large"
         android:text="@string/foure"
         app:layout_constraintBottom_toTopOf="@+id/btn1"
         app:layout_constraintEnd_toStartOf="@+id/btn5"
@@ -299,7 +299,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:textAlignment="viewEnd"
-        android:textSize="35sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/tvOperation"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -310,7 +310,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/grey"
-        android:layout_marginTop="5dp"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
         app:layout_constraintStart_toStartOf="@id/guideline2"
@@ -319,15 +318,15 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnProfile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/profile_btn" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnHistory"
-            style="@style/btnHistoryStyle"
-            android:layout_gravity="end"
-            android:text="@string/history" />
+            style="@style/btnHistoryStyleLarge"
+            android:text="@string/history"
+            android:layout_gravity="end" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -347,7 +346,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
+        app:layout_constraintGuide_percent="0.15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

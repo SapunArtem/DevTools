@@ -12,6 +12,11 @@
 
 ## 📸 Скриншоты
 
+ **Фото экрана профиля**
+ 
+ <img src="src/main/res/drawable/photo_profile.jpg" width="250" alt="Profile Photo">
+
+
 | История вычислений                        | Экран с результатами | Экран ввода                                             |
 |-----------------------------------------|----------------------|---------------------------------------------------------|
 |![photo1.jpg](src%2Fmain%2Fres%2Fdrawable%2Fphoto1.jpg) | ![photo2.jpg](src%2Fmain%2Fres%2Fdrawable%2Fphoto2.jpg) | ![photo3.jpg](src%2Fmain%2Fres%2Fdrawable%2Fphoto3.jpg) |
