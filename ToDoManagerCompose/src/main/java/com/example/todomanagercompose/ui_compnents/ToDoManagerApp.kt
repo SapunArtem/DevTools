@@ -32,115 +32,170 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.todomanagercompose.Task
+import com.example.todomanagercompose.model.Task
 import com.example.todomanagercompose.ui.theme.MainContainer
 import com.example.todomanagercompose.ui.theme.OrangeForAddButton
 
+/**
+ * Главный компонент приложения для управления задачами (To-Do Manager).
+ *
+ * Этот компонент предоставляет:
+ * - Отображение списка задач
+ * - Добавление новых задач через диалоговое окно
+ * - Удаление задач
+ * - Отметку задач как выполненных
+ *
+ * @sample com.example.todomanagercompose.preview.ToDoManagerPreview
+ * @see androidx.compose.material3.Scaffold
+ * @see androidx.compose.material3.FloatingActionButton
+ */
 @Composable
 fun ToDoManagerApp() {
+    // Состояние списка задач. Используем mutableStateOf для реактивного обновления UI
     var tasks by remember { mutableStateOf<List<Task>>(emptyList()) }
+
+    // Счетчик для генерации уникальных ID новых задач
     var newTaskId by remember { mutableIntStateOf(1) }
-    var newTaskTitle by remember { mutableStateOf("") }
-    var newTaskDescription by remember { mutableStateOf("") }
+
+    // Состояние полей формы для новой задачи
+    var newTaskTitle by remember { mutableStateOf("") }  // Название задачи (обязательное поле)
+    var newTaskDescription by remember { mutableStateOf("") }  // Описание задачи (необязательное)
+
+    // Состояние видимости диалогового окна добавления новой задачи
     var showDialog by remember { mutableStateOf(false) }
 
-
+    /**
+     * Функция для добавления новой задачи в список.
+     *
+     * Проверяет, что поле названия не пустое, затем:
+     * 1. Создает новую задачу с уникальным ID
+     * 2. Добавляет задачу в список
+     * 3. Сбрасывает поля формы
+     * 4. Закрывает диалоговое окно
+     */
     fun addTask() {
         if (newTaskTitle.isNotBlank()) {
             tasks = tasks + Task(
-                id = newTaskId++,
+                id = newTaskId++,  // Инкрементируем ID для следующей задачи
                 title = newTaskTitle,
                 description = newTaskDescription
             )
+            // Сбрасываем поля формы
             newTaskTitle = ""
             newTaskDescription = ""
             showDialog = false
         }
     }
 
+    // Используем Scaffold как основу для Material Design интерфейса
     Scaffold(
+        // Верхняя панель приложения
         topBar = { MainTopAppBar() },
-        content = { padding ->
+
+        // Основное содержимое экрана
+        content = { paddingValues ->
             Box(
                 modifier = Modifier
-                    .padding(padding)
+                    .padding(paddingValues)  // Учитываем системные отступы
                     .fillMaxSize()
-                    .background(MainContainer)
+                    .background(MainContainer)  // Фон основного контейнера
             ) {
-                if (tasks.isEmpty()) {
-                    Text(
-                        text = "Нет задач, добавьте первую!",
-                        modifier = Modifier.align(Alignment.Center),
-                        color = Color.Gray
-                    )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        items(
-                            items = tasks,
-                            key = { it.id }
-                        ) { task ->
-                            ItemList(
-                                task = task,
-                                onDelete = { tasks = tasks.filter { it.id != task.id } },
-                                onCheckedChange = { isChecked ->
-                                    tasks = tasks.map {
-                                        if (it.id == task.id) it.copy(isCompleted = isChecked) else it
+                when {
+                    // Если список задач пуст - показываем подсказку
+                    tasks.isEmpty() -> {
+                        Text(
+                            text = "Нет задач, добавьте первую!",
+                            modifier = Modifier.align(Alignment.Center),
+                            color = Color.Gray
+                        )
+                    }
+
+                    // Отображаем список задач
+                    else -> {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            items(
+                                items = tasks,
+                                key = { it.id }  // Уникальный ключ для правильной работы анимаций
+                            ) { task ->
+                                // Компонент отдельной задачи
+                                ItemList(
+                                    task = task,
+                                    onDelete = {
+                                        // Удаляем задачу по ID (создаем новый список без этой задачи)
+                                        tasks = tasks.filter { it.id != task.id }
+                                    },
+                                    onCheckedChange = { isChecked ->
+                                        // Обновляем статус выполнения задачи
+                                        tasks = tasks.map { currentTask ->
+                                            if (currentTask.id == task.id) {
+                                                currentTask.copy(isCompleted = isChecked)
+                                            } else {
+                                                currentTask
+                                            }
+                                        }
                                     }
-                                }
-                            )
+                                )
+                            }
                         }
                     }
                 }
             }
         },
+
+        // Кнопка "Добавить" в правом нижнем углу
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { showDialog = true },
-                containerColor = OrangeForAddButton,
-                contentColor = Color.White,
-                shape = CircleShape,
-                elevation = FloatingActionButtonDefaults.elevation(8.dp),
+                onClick = { showDialog = true },  // Показываем диалог при клике
+                containerColor = OrangeForAddButton,  // Цвет кнопки
+                contentColor = Color.White,  // Цвет иконки
+                shape = CircleShape,  // Круглая форма
+                elevation = FloatingActionButtonDefaults.elevation(8.dp),  // Тень
                 modifier = Modifier
-                    .navigationBarsPadding()
-                    .size(110.dp)
-                    .padding(end = 30.dp, bottom = 30.dp)
+                    .navigationBarsPadding()  // Учет системной панели навигации
+                    .size(110.dp)  // Размер кнопки
+                    .padding(end = 30.dp, bottom = 30.dp)  // Отступы от краев
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Добавление новой задачи",
-                    modifier = Modifier.size(50.dp)
+                    imageVector = Icons.Default.Add,  // Иконка "+"
+                    contentDescription = "Добавление новой задачи",  // Описание для accessibility
+                    modifier = Modifier.size(50.dp)  // Размер иконки
                 )
             }
         }
     )
 
+    // Диалоговое окно для добавления новой задачи
     if (showDialog) {
         AlertDialog(
-            onDismissRequest = { showDialog = false },
-            title = { Text("Новая задача") },
+            onDismissRequest = { showDialog = false },  // Закрытие при клике вне диалога
+            title = { Text("Новая задача") },  // Заголовок диалога
             text = {
                 Column {
+                    // Поле ввода названия задачи
                     OutlinedTextField(
                         value = newTaskTitle,
                         onValueChange = { newTaskTitle = it },
-                        label = { Text("Название задачи*") },
-                        modifier = Modifier.fillMaxWidth()
+                        label = { Text("Название задачи*") },  // Подсказка
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true  // Одна строка для названия
                     )
 
+                    // Поле ввода описания
                     OutlinedTextField(
                         value = newTaskDescription,
                         onValueChange = { newTaskDescription = it },
                         label = { Text("Описание") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        maxLines = 3  // Несколько строк для описания
                     )
                 }
             },
             confirmButton = {
                 Button(
-                    onClick = { addTask() },
-                    enabled = newTaskTitle.isNotBlank()
+                    onClick = { addTask() },  // Вызов функции добавления
+                    enabled = newTaskTitle.isNotBlank()  // Активна только при заполненном названии
                 ) {
                     Text("Добавить")
                 }
@@ -152,5 +207,4 @@ fun ToDoManagerApp() {
             }
         )
     }
-
 }

@@ -3,11 +3,8 @@ package com.example.todomanagercompose.ui_compnents
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
@@ -22,14 +19,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.app.NotificationCompat.Style
-import com.example.todomanagercompose.Task
+import com.example.todomanagercompose.model.Task
 import com.example.todomanagercompose.ui.theme.MainContainer
 import com.example.todomanagercompose.ui.theme.OrangeForAddButton
 
-
+/**
+ * Функция описывает элемент списка задач
+ *
+ * Отображает карточку задачи с:
+ * - Чекбоксом для отметки выполнения
+ * - Названием, описанием и датой создания
+ * - Кнопкой удаления задачи
+ *
+ * Визуальное поведение
+ * - Выполненные задачи отображаются с серым текстом и полупрозрачным фоном
+ * - Невыполненные - с черным текстом на белом фоне
+ *
+ * Требования
+ * - Рекомендуется использовать в LazyColumn для списков
+ *
+ * @param task Модель данных задачи для отображения
+ * @param onDelete Лямбда функция, вызываемая при удалении задачи
+ * @param onCheckedChange Лямбда функция, вызываемая при изменении состояния чекбокса
+ *
+ * @sample com.example.todomanagercompose.preview.TaskItemPreview
+ * @see androidx.compose.material3.Card
+ * @see androidx.compose.material3.Checkbox
+ *
+ */
 @Composable
 fun ItemList(
     task: Task,
