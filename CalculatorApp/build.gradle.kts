@@ -18,6 +18,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testOptions{
+            animationsDisabled = true
+        }
     }
 
     buildTypes {
@@ -49,6 +52,9 @@ android {
 
 
 dependencies {
+
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.runner)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
