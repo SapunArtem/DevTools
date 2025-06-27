@@ -7,15 +7,15 @@ object MenuRepository {
     val menuItems = listOf(
         MenuItem(
             "Профиль",
-            Screen.Profile.route
+            Screen.MenuProfile.route
         ),
         MenuItem(
             "Настройки",
-            Screen.Settings.route
+            Screen.MenuSettings.route
         ),
         MenuItem(
             "О приложении",
-            Screen.AboutScreen.route
+            Screen.MenuAboutScreen.route
         )
     )
 }

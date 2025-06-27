@@ -18,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pizzashop.ui.theme.TextDescription
 
-@Preview
 @Composable
 fun SettingsScreen(){
     Column(

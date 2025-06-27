@@ -20,6 +20,7 @@ object BottomNavigatioRepository {
         BottomItem(
             "Menu",
             Icons.Filled.Menu,
-            Screen.Menu.route),
+            Screen.MenuRoot.route),
+
     )
 }

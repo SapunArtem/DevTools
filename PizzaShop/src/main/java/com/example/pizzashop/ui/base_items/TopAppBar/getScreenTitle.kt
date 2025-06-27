@@ -9,9 +9,10 @@ fun getScreenTitle(
         Screen.Pizza.route -> Screen.Pizza.title
         Screen.Basket.route -> Screen.Basket.title
         Screen.Details.route -> Screen.Details.title
-        Screen.Menu.route -> Screen.Menu.title
-        Screen.Profile.route -> Screen.Profile.title
-        Screen.Settings.route -> Screen.Settings.title
+        Screen.MenuMain.route -> Screen.MenuMain.title
+        Screen.MenuProfile.route -> Screen.MenuProfile.title
+        Screen.MenuSettings.route -> Screen.MenuSettings.title
+        Screen.MenuAboutScreen.route -> Screen.MenuAboutScreen.title
         else -> "PizzaShop"
     }
 }

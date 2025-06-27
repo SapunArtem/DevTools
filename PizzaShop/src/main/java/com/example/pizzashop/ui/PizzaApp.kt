@@ -17,7 +17,7 @@ import com.example.pizzashop.ui.base_items.BottomBar.PizzaBottomBar
 import com.example.pizzashop.ui.base_items.TopAppBar.PizzaTopAppBar
 import com.example.pizzashop.ui.base_items.TopAppBar.getScreenTitle
 
-@Preview
+
 @Composable
 fun PizzaApp(){
     val navController = rememberNavController()
@@ -34,7 +34,7 @@ fun PizzaApp(){
             )
         },
         bottomBar = {
-            PizzaBottomBar(navController)
+            PizzaBottomBar(navController,currentRoute)
         },
         content = {padding->
             PizzaNavigation(
