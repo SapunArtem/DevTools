@@ -6,8 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.pizzashop.model.Pizza
@@ -17,13 +20,13 @@ import com.example.pizzashop.ui.base_items.BottomBar.PizzaBottomBar
 import com.example.pizzashop.ui.base_items.TopAppBar.PizzaTopAppBar
 import com.example.pizzashop.ui.base_items.TopAppBar.getScreenTitle
 
-
 @Composable
 fun PizzaApp(){
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
-    val basketList = remember { mutableStateListOf<Pizza>() }
+    val viewModel : BasketViewModel = viewModel()
+
 
     Scaffold (
         topBar = {
@@ -41,8 +44,12 @@ fun PizzaApp(){
                 navController = navController,
                 modifier = Modifier
                     .padding(padding),
-                basketList = basketList
+                basketList = viewModel.basketItems
             )
         }
     )
+}
+
+class BasketViewModel : ViewModel(){
+    val basketItems = mutableStateListOf<Pizza>()
 }
