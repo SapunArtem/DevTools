@@ -13,8 +13,9 @@ import com.example.pizzashop.ui.theme.TitleAppBar
 @Composable
 fun PizzaTopAppBar(
     title : String,
-    navigationIcon: @Composable () -> Unit = {},
-    action: @Composable RowScope.() -> Unit = {}
+    action: @Composable RowScope.() -> Unit = {},
+    showBackButton : Boolean = false,
+    onBackClick:()->Unit
 ){
     TopAppBar(
         title = {
@@ -26,7 +27,11 @@ fun PizzaTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Orange
         ),
-        navigationIcon = navigationIcon,
+
+        navigationIcon = {
+            if (showBackButton){
+            NavigationIconBack { onBackClick() }
+        } },
         actions = action
 
     )

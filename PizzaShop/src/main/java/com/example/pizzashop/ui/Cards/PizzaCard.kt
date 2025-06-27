@@ -42,7 +42,7 @@ fun PizzaCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 16.dp)
-            .clickable(onClick = {  }
+            .clickable(onClick = { onPizzaClick() }
             ),
         elevation = CardDefaults.cardElevation(5.dp)
     ){
