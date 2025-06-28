@@ -27,7 +27,7 @@ fun PizzaBottomBar(
     NavigationBar {
         BottomNavigatioRepository.navigationItems.forEach { bottomItem ->
             val isSelected = when {
-                bottomItem.route == Screen.MenuMain.route -> currentRoute?.startsWith("menu_") == true
+                bottomItem.route == Screen.MenuRoot.route -> currentRoute?.startsWith("menu_") == true
                 else -> currentRoute == bottomItem.route
             }
             NavigationBarItem(
