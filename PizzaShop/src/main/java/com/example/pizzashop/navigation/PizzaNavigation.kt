@@ -22,7 +22,7 @@ import com.example.pizzashop.ui.screens.MenuScreens.SettingsScreen
 sealed class Screen(val route: String, val title: String) {
     object Pizza : Screen("pizza_screen", "Пицца")
     object Basket : Screen("basket_screen", "Корзина")
-    object Details : Screen("details_screen/{pizzaId}", "О проукте") {
+    object Details : Screen("details_screen/{pizzaId}", "О продукте") {
         fun createRoute(pizzaId: Int) = "details_screen/$pizzaId"
     }
 

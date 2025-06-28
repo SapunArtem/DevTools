@@ -1,7 +1,6 @@
 package com.example.pizzashop.ui.Cards
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,11 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.pizzashop.R
 import com.example.pizzashop.model.Pizza
 import com.example.pizzashop.ui.theme.Orange
 import com.example.pizzashop.ui.theme.PizzaName
@@ -77,6 +74,8 @@ fun BasketCard(
                 )
             }
             IconButton(
+                modifier = Modifier
+                    .testTag("удалить"),
                 onClick = {onRemoveClick()}
             ) { Icon(
                 Icons.Default.Delete,

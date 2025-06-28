@@ -9,23 +9,18 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.pizzashop.R
 import com.example.pizzashop.model.Pizza
 import com.example.pizzashop.ui.base_items.TopAppBar.BasketIcon
 import com.example.pizzashop.ui.theme.Orange
@@ -40,6 +35,7 @@ fun PizzaCard(
 ){
     Card (
         modifier = Modifier
+            .testTag("pizza_${pizza.id}")
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 16.dp)
             .clickable(onClick = { onPizzaClick() }
@@ -74,7 +70,8 @@ fun PizzaCard(
             Button(
                 onClick = {onAddToBasket()},
                 modifier = Modifier
-                    .padding(start = 15.dp, bottom = 5.dp),
+                    .padding(start = 15.dp, bottom = 5.dp)
+                    .testTag("add_btn_${pizza.id}"),
                 colors = ButtonDefaults.buttonColors(Orange),
                 elevation = ButtonDefaults.buttonElevation(4.dp)
             ) {
