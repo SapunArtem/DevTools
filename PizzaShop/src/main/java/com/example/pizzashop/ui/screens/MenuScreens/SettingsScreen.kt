@@ -1,6 +1,5 @@
 package com.example.pizzashop.ui.screens.MenuScreens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pizzashop.ui.theme.TextDescription
 
+/**
+ * Экран настроек приложения
+ */
 @Composable
-fun SettingsScreen(){
+fun SettingsScreen() {
     Column(
         modifier = Modifier
             .padding(top = 20.dp)
@@ -31,7 +32,7 @@ fun SettingsScreen(){
                 .fillMaxWidth(),
             colors = CardDefaults.cardColors(Color.White),
             elevation = CardDefaults.cardElevation(2.dp)
-        ){
+        ) {
             Text(
                 modifier = Modifier
                     .padding(start = 10.dp)
@@ -49,7 +50,7 @@ fun SettingsScreen(){
                 .fillMaxWidth(),
             colors = CardDefaults.cardColors(Color.White),
             elevation = CardDefaults.cardElevation(2.dp)
-        ){
+        ) {
             Text(
                 modifier = Modifier
                     .padding(start = 10.dp)
@@ -67,7 +68,7 @@ fun SettingsScreen(){
                 .fillMaxWidth(),
             colors = CardDefaults.cardColors(Color.White),
             elevation = CardDefaults.cardElevation(2.dp)
-        ){
+        ) {
             Text(
                 modifier = Modifier
                     .padding(start = 10.dp)
@@ -85,7 +86,7 @@ fun SettingsScreen(){
                 .fillMaxWidth(),
             colors = CardDefaults.cardColors(Color.White),
             elevation = CardDefaults.cardElevation(2.dp)
-        ){
+        ) {
             Text(
                 modifier = Modifier
                     .padding(start = 10.dp)

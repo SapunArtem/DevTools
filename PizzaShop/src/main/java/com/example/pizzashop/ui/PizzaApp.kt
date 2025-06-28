@@ -5,10 +5,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -20,26 +17,30 @@ import com.example.pizzashop.ui.base_items.BottomBar.PizzaBottomBar
 import com.example.pizzashop.ui.base_items.TopAppBar.PizzaTopAppBar
 import com.example.pizzashop.ui.base_items.TopAppBar.getScreenTitle
 
+/**
+ * Главный компонент приложения
+ * Содержит Scaffold с верхним навигационным меню, нижней панелью навигации и контентом
+ */
 @Composable
-fun PizzaApp(){
+fun PizzaApp() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
-    val viewModel : BasketViewModel = viewModel()
+    val viewModel: BasketViewModel = viewModel()
 
 
-    Scaffold (
+    Scaffold(
         topBar = {
             PizzaTopAppBar(
                 title = getScreenTitle(currentRoute),
                 showBackButton = currentRoute != Screen.Pizza.route,
-                onBackClick = {navController.popBackStack()}
+                onBackClick = { navController.popBackStack() }
             )
         },
         bottomBar = {
-            PizzaBottomBar(navController,currentRoute)
+            PizzaBottomBar(navController, currentRoute)
         },
-        content = {padding->
+        content = { padding ->
             PizzaNavigation(
                 navController = navController,
                 modifier = Modifier
@@ -50,6 +51,10 @@ fun PizzaApp(){
     )
 }
 
-class BasketViewModel : ViewModel(){
+/**
+ * ViewModel для работы с корзиной(сохранение состояния при перевороте)
+ * @property basketItems Список пицц в корзине
+ */
+class BasketViewModel : ViewModel() {
     val basketItems = mutableStateListOf<Pizza>()
 }

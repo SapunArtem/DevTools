@@ -19,6 +19,11 @@ import com.example.pizzashop.ui.screens.MenuScreens.AboutScreen
 import com.example.pizzashop.ui.screens.MenuScreens.ProfileScreen
 import com.example.pizzashop.ui.screens.MenuScreens.SettingsScreen
 
+/**
+ * Содержит маршруты экранов приложения
+ * @property route Маршрут к экрану
+ * @property title Заголовок экрана
+ */
 sealed class Screen(val route: String, val title: String) {
     object Pizza : Screen("pizza_screen", "Пицца")
     object Basket : Screen("basket_screen", "Корзина")
@@ -34,7 +39,12 @@ sealed class Screen(val route: String, val title: String) {
 
 }
 
-
+/**
+ *Навигационный компонент приложения
+ * @param navController Контроллер навигации
+ * @param modifier Модификатор компоновки
+ * @param basketList Список пицц в корзине
+ */
 @Composable
 fun PizzaNavigation(
     navController: NavHostController,
@@ -48,6 +58,7 @@ fun PizzaNavigation(
         startDestination = Screen.Pizza.route,
         modifier = modifier
     ) {
+        // Навигация для экрана PizzaScreen
         composable(Screen.Pizza.route) {
             PizzaScreen(
                 onPizzaClick = { pizzaId ->
@@ -58,6 +69,7 @@ fun PizzaNavigation(
                 }
             )
         }
+        // Навигация для экрана BasketScreen
         composable(Screen.Basket.route) {
             BasketScreen(
                 pizzas = basketList,
@@ -66,6 +78,7 @@ fun PizzaNavigation(
                 }
             )
         }
+        // Навигация для экрана DetailsScreen
         composable(
             Screen.Details.route,
             arguments = listOf(navArgument("pizzaId") { type = NavType.IntType })
@@ -85,16 +98,17 @@ fun PizzaNavigation(
         navigation(
             startDestination = Screen.MenuMain.route,
             route = Screen.MenuRoot.route
-        ){
+        ) {
+            // Навигация для экрана MenuScreen
             composable(Screen.MenuMain.route) {
                 MenuScreen(
                     navController = navController
                 )
             }
-
+            // Навигация для экранов в MenuScreen(ProfileScreen,SettingsScreen,AboutScreen)
             MenuRepository.menuItems.forEach { menuItem ->
-                composable(menuItem.route){
-                    when(menuItem.route){
+                composable(menuItem.route) {
+                    when (menuItem.route) {
                         Screen.MenuProfile.route -> ProfileScreen()
                         Screen.MenuAboutScreen.route -> AboutScreen()
                         Screen.MenuSettings.route -> SettingsScreen()
@@ -102,7 +116,6 @@ fun PizzaNavigation(
                 }
             }
         }
-
 
 
     }

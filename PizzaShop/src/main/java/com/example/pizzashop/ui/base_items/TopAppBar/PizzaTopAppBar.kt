@@ -9,6 +9,14 @@ import androidx.compose.runtime.Composable
 import com.example.pizzashop.ui.theme.Orange
 import com.example.pizzashop.ui.theme.TitleAppBar
 
+
+/**
+ * Верхнее навигационное меню TopAppBar
+ * @param title Заголовок в TopAppBar
+ * @param action Кнопки в TopAppBar -> опционально,добавляется если необходимо
+ * @param showBackButton Описывает состояние кнопки назад(показывать/не показывать)
+ * @param onBackClick Обработчик нажатия кнопки назад
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PizzaTopAppBar(

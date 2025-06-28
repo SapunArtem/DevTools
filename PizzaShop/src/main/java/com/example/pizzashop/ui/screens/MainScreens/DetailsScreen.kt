@@ -31,71 +31,76 @@ import com.example.pizzashop.ui.theme.PizzaName
 import com.example.pizzashop.ui.theme.PizzaPrice
 import com.example.pizzashop.ui.theme.TextDescription
 
+/**
+ * Экран делей пиццы
+ * @param pizza Данные о пицце
+ * @param onAddToBasketClick Обработчик добавления в корзину
+ */
 @Composable
 fun DetailsScreen(
     pizza: Pizza,
-    onAddToBasketClick:()->Unit,
+    onAddToBasketClick: () -> Unit,
 
-){
-            Box(
+    ) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(pizza.image),
+                contentDescription = pizza.name,
                 modifier = Modifier
-                    .fillMaxSize()
-            ){
-                Column (
-                    verticalArrangement = Arrangement.Center
+                    .fillMaxWidth(),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = pizza.name,
+                modifier = Modifier.padding(start = 15.dp),
+                style = PizzaName
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = "Описание",
+                modifier = Modifier.padding(start = 15.dp),
+                style = TextDescription
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = pizza.description,
+                textAlign = TextAlign.Justify,
+                modifier = Modifier.padding(start = 15.dp),
+                style = PizzaDescription
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.padding(start = 15.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    modifier = Modifier
+                        .testTag("add_btn"),
+                    onClick = { onAddToBasketClick() },
+                    colors = ButtonDefaults.buttonColors(Orange)
                 ) {
-                    Image(
-                        painter = painterResource(pizza.image),
-                        contentDescription = pizza.name,
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Crop
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
                     Text(
-                        text = pizza.name,
-                        modifier = Modifier.padding(start = 15.dp),
-                        style = PizzaName
+                        text = "В корзину",
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
-                    Spacer(modifier = Modifier.height(15.dp))
-                    Text(
-                        text = "Описание",
-                        modifier = Modifier.padding(start = 15.dp),
-                        style = TextDescription
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
-                    Text(
-                        text = pizza.description,
-                        textAlign = TextAlign.Justify,
-                        modifier = Modifier.padding(start = 15.dp),
-                        style = PizzaDescription
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
-                    Row(
-                        modifier = Modifier.padding(start = 15.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Button(
-                            modifier = Modifier
-                                .testTag("add_btn"),
-                            onClick = {onAddToBasketClick()},
-                            colors = ButtonDefaults.buttonColors(Orange)
-                        ) {
-                            Text(
-                                text = "В корзину",
-                                fontSize = 30.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        }
-
-                        Text(
-                            text = pizza.price.toString(),
-                            modifier = Modifier.padding(start = 15.dp),
-                            style = PizzaPrice
-                        )
-                    }
-
                 }
+
+                Text(
+                    text = pizza.price.toString(),
+                    modifier = Modifier.padding(start = 15.dp),
+                    style = PizzaPrice
+                )
             }
+
         }
+    }
+}

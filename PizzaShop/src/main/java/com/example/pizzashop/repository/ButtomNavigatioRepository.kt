@@ -7,20 +7,27 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import com.example.pizzashop.model.BottomItem
 import com.example.pizzashop.navigation.Screen
 
+/**
+ * Репозиторий для элементов нижнего навигационного меню
+ * @property navigationItems Список элементов навигации
+ */
 object BottomNavigatioRepository {
     val navigationItems = listOf(
         BottomItem(
             "Pizza",
             Icons.Filled.Home,
-            Screen.Pizza.route),
+            Screen.Pizza.route
+        ),
         BottomItem(
             "Basket",
             Icons.Filled.ShoppingCart,
-            Screen.Basket.route),
+            Screen.Basket.route
+        ),
         BottomItem(
             "Menu",
             Icons.Filled.Menu,
-            Screen.MenuRoot.route),
+            Screen.MenuRoot.route
+        ),
 
-    )
+        )
 }

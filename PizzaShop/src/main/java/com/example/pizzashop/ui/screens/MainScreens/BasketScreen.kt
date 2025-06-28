@@ -14,34 +14,41 @@ import com.example.pizzashop.model.Pizza
 import com.example.pizzashop.ui.Cards.BasketCard
 import com.example.pizzashop.ui.theme.Orange
 
+/**
+ * Экран корзины с пиццами
+ * @param pizzas Список пицц в корзине
+ * @param onRemoveClick Обработчик удаления пиццы из корзины
+ */
 @Composable
 fun BasketScreen(
-    pizzas : List<Pizza>,
-    onRemoveClick:(Pizza)->Unit
-){
+    pizzas: List<Pizza>,
+    onRemoveClick: (Pizza) -> Unit
+) {
 
-            if (pizzas.isEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
+    if (pizzas.isEmpty()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        )
+        {
+            Text(
+                text = "Корзина пуста",
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold,
+                color = Orange
+            )
+        }
+    } else {
+        LazyColumn()
+        {
+            items(pizzas) { pizza ->
+                BasketCard(
+                    pizza = pizza,
+                    onRemoveClick = { onRemoveClick(pizza) }
                 )
-                {
-                    Text(
-                        text = "Корзина пуста",
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Orange
-                    )
-                }
-            }else{
-                LazyColumn()
-                { items(pizzas) {pizza->
-                    BasketCard(
-                        pizza = pizza,
-                        onRemoveClick = {onRemoveClick(pizza)}
-                    )
-                } }
             }
         }
+    }
+}
 

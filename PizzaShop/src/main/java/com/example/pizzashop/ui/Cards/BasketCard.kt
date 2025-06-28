@@ -32,22 +32,27 @@ import com.example.pizzashop.ui.theme.Orange
 import com.example.pizzashop.ui.theme.PizzaName
 import com.example.pizzashop.ui.theme.PizzaPrice
 
+/**
+ * Элемент списка пицц добавленных в корзину в виде карточки
+ * @param pizza Данные о пицце
+ * @param onRemoveClick Обработчик удаления пиццы из корзины
+ */
 @Composable
 fun BasketCard(
     pizza: Pizza,
-    onRemoveClick:()->Unit
-){
-    Card (
+    onRemoveClick: () -> Unit
+) {
+    Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(Color.White),
         elevation = CardDefaults.cardElevation(5.dp)
-    ){
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .clip(CircleShape)
@@ -62,7 +67,7 @@ fun BasketCard(
                 )
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Column (modifier = Modifier.weight(1f)){
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = pizza.name,
                     style = PizzaName
@@ -76,12 +81,13 @@ fun BasketCard(
             IconButton(
                 modifier = Modifier
                     .testTag("удалить"),
-                onClick = {onRemoveClick()}
-            ) { Icon(
-                Icons.Default.Delete,
-                "Удалить",
-                tint = Orange
-            )
+                onClick = { onRemoveClick() }
+            ) {
+                Icon(
+                    Icons.Default.Delete,
+                    "Удалить",
+                    tint = Orange
+                )
             }
         }
     }

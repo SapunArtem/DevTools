@@ -6,8 +6,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Иконка корзины
+ */
 @Composable
-fun BasketIcon(){
+fun BasketIcon() {
     Icon(
         imageVector = Icons.Default.ShoppingCart,
         contentDescription = "Корзина",

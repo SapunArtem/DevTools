@@ -27,13 +27,20 @@ import com.example.pizzashop.ui.theme.Orange
 import com.example.pizzashop.ui.theme.PizzaName
 import com.example.pizzashop.ui.theme.PizzaPrice
 
+
+/**
+ * Элемент списка пицц в виде карточки
+ * @param pizza Информация о пицце
+ * @param onPizzaClick Обработчие нажатия на карточки пиццы
+ * @param onAddToBasket Обработчик добавления пиццы в корзину
+ */
 @Composable
 fun PizzaCard(
     pizza: Pizza,
-    onPizzaClick:()->Unit,
-    onAddToBasket:()-> Unit
-){
-    Card (
+    onPizzaClick: () -> Unit,
+    onAddToBasket: () -> Unit
+) {
+    Card(
         modifier = Modifier
             .testTag("pizza_${pizza.id}")
             .fillMaxWidth()
@@ -41,12 +48,12 @@ fun PizzaCard(
             .clickable(onClick = { onPizzaClick() }
             ),
         elevation = CardDefaults.cardElevation(5.dp)
-    ){
-        Column (
+    ) {
+        Column(
             modifier = Modifier
                 .background(Color.White),
             verticalArrangement = Arrangement.Center
-        ){
+        ) {
             Image(
                 painter = painterResource(pizza.image),
                 contentDescription = pizza.name,
@@ -68,7 +75,7 @@ fun PizzaCard(
                 style = PizzaPrice
             )
             Button(
-                onClick = {onAddToBasket()},
+                onClick = { onAddToBasket() },
                 modifier = Modifier
                     .padding(start = 15.dp, bottom = 5.dp)
                     .testTag("add_btn_${pizza.id}"),

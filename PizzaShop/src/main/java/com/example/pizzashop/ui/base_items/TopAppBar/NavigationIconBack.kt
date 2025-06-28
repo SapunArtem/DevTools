@@ -9,6 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 
+/**
+ * Кнопка навигации(кнопка назад) в TopAppBar
+ * @param onBackClick Обработчик нажатия кнопки назад
+ */
 @Composable
 fun NavigationIconBack(
     onBackClick:() -> Unit

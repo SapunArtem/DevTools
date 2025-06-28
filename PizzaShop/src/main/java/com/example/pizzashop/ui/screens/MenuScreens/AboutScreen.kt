@@ -10,20 +10,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pizzashop.navigation.Screen
 import com.example.pizzashop.ui.theme.PizzaDescription
-import com.example.pizzashop.ui.theme.PizzaName
 import com.example.pizzashop.ui.theme.TextDescription
 
+/**
+ * Экран описывающий приложение
+ */
 @Composable
-fun AboutScreen(){
+fun AboutScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)
-    ){
+    ) {
         Column(
             verticalArrangement = Arrangement.Center
         ) {
