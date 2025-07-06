@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "DevTools"
 include(":ToDoManager")
 include(":CalculatorApp")
-include(":NotesApp")
+include(":Note")
