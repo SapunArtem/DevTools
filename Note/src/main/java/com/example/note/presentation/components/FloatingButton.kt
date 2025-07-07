@@ -15,6 +15,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.note.presentation.ui.theme.Orange
 
+/**
+ * Компонент FloatingButton — это плавающая кнопка с иконкой "плюс",
+ * предназначенная для добавления новой заметки.
+ *
+ * @param onClick Лямбда-обработчик, вызывается при нажатии на кнопку.
+ */
 @Composable
 fun FloatingButton(
     onClick: () -> Unit

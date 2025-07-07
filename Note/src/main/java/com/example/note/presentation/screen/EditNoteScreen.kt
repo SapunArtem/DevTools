@@ -1,28 +1,22 @@
 package com.example.note.presentation.screen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -31,16 +25,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.PlatformTextStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.note.presentation.ui.theme.ContentTextStyle
 import com.example.note.presentation.ui.theme.DateTextStyle
 import com.example.note.presentation.ui.theme.TitleTextStyle
@@ -49,6 +37,13 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Экран для создания новой заметки или редактирования существующей.
+ *
+ * @param noteId ID заметки для редактирования. Если null, создаётся новая заметка.
+ * @param viewModel Экземпляр [NotesViewModel] для работы с заметками.
+ * @param onBack Лямбда-функция, вызываемая при возврате назад (например, по кнопке назад).
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditNoteScreen(
@@ -59,6 +54,8 @@ fun EditNoteScreen(
     val currentDate = remember { System.currentTimeMillis() }
     var isTitleFocused by remember { mutableStateOf(false) }
     var isContentFocused by remember { mutableStateOf(false) }
+
+    // Получаем заметку из ViewModel по ID, если он задан
     val noteState by remember(noteId) {
         if (noteId != null) {
             derivedStateOf { viewModel.notes.value.find { it.id == noteId } }
@@ -66,8 +63,12 @@ fun EditNoteScreen(
             mutableStateOf(null)
         }
     }
+
+    // Состояния для заголовка и содержимого заметки
     var title by remember { mutableStateOf(noteState?.title ?: "") }
     var content by remember { mutableStateOf(noteState?.content ?: "") }
+
+    // Форматируем дату создания или текущую дату
     val dateText = remember(noteState) {
         noteState?.createdAt?.let {
             SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault()).format(Date(it))
@@ -75,6 +76,7 @@ fun EditNoteScreen(
     }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
                 title = { Text(if (noteId == null) "Новая заметка" else "Редактировать") },
@@ -84,6 +86,23 @@ fun EditNoteScreen(
                     }
                 },
                 actions = {
+                    // Кнопка удаления для существующей заметки
+                    if (noteId != null) {
+                        IconButton(
+                            onClick = {
+                                noteState?.let {
+                                    viewModel.deleteNote(it)
+                                    onBack()
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Удалить заметку",
+                            )
+                        }
+                    }
+                    // Кнопка сохранения заметки
                     IconButton(
                         onClick = {
                             if (title.isNotBlank()) {
@@ -107,9 +126,10 @@ fun EditNoteScreen(
                     }
                 }
             )
-        }
+        },
 
-    ) { padding ->
+
+        ) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding)
@@ -128,8 +148,8 @@ fun EditNoteScreen(
                 textStyle = TitleTextStyle,
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = Color.White,
-                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
                     unfocusedIndicatorColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent
@@ -158,8 +178,8 @@ fun EditNoteScreen(
                 textStyle = ContentTextStyle,
                 minLines = 10,
                 colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = Color.White,
-                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
                     unfocusedIndicatorColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent

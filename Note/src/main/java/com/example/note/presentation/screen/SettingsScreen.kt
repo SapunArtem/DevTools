@@ -22,6 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.note.presentation.ui.theme.AppTheme
 
+/**
+ * Экран настроек приложения, позволяет выбрать тему оформления.
+ *
+ * @param navController Навигационный контроллер для обработки возврата назад.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(

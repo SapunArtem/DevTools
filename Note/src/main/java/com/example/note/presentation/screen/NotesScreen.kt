@@ -18,30 +18,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.note.data.local.database.NoteDatabase
-import com.example.note.data.local.repository.NoteRepositoryImpl
 import com.example.note.presentation.components.FloatingButton
 import com.example.note.presentation.components.NoteItem
 import com.example.note.presentation.viewModel.NotesViewModel
-import com.example.note.presentation.viewModel.NotesViewModelFactory
 
+
+
+/**
+ * Экран отображения списка заметок пользователя.
+ *
+ * @param viewModel Экземпляр [NotesViewModel] для работы с заметками.
+ * @param onNoteClick Лямбда, вызываемая при нажатии на заметку, принимает ID заметки.
+ * @param onAddNote Лямбда для обработки нажатия кнопки добавления новой заметки.
+ * @param onSettingsClick Лямбда для обработки нажатия кнопки перехода в настройки.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
-    viewModel: NotesViewModel = viewModel(
-        factory = NotesViewModelFactory(
-            NoteRepositoryImpl(
-                NoteDatabase.getDatabase(LocalContext.current).noteDao()
-            )
-        )
-    ),
+    viewModel: NotesViewModel,
     onNoteClick: (Long) -> Unit,
     onAddNote: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
+    // Получаем текущий список заметок из ViewModel
     val notes by viewModel.notes.collectAsState()
 
     Scaffold(
