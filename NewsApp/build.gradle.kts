@@ -41,6 +41,21 @@ android {
 
 dependencies {
 
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.9.1")
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+    //Coil
+    //implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+    implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
+    implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
