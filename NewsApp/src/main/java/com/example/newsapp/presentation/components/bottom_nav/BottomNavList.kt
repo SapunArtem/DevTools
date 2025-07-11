@@ -6,6 +6,9 @@ import androidx.compose.material.icons.filled.Settings
 import com.example.newsapp.R
 import com.example.newsapp.presentation.navigation.Screen
 
+/**
+ * BottomNavList - Объект с конфигурацией элементов нижней навигации.
+ */
 object BottomNavList {
     val bottomNavItemsList = listOf(
         BottomItem(

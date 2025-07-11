@@ -9,15 +9,22 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * NewsViewModel - ViewModel для экрана списка новостей.
+ * Управляет состоянием загрузки, ошибок и списком новостей.
+ */
 class NewsViewModel : ViewModel() {
     private val repository = NewsRepository()
 
+    // Состояние списка новостей
     private val _newsState = MutableStateFlow<List<Results>>(emptyList())
     val newsState: StateFlow<List<Results>> = _newsState.asStateFlow()
 
+    // Состояние загрузки
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    // Состояние ошибки
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
@@ -27,6 +34,9 @@ class NewsViewModel : ViewModel() {
     }
 
 
+    /**
+     * Загружает список новостей
+     */
     fun loadNews() {
         viewModelScope.launch {
             _isLoading.value = true

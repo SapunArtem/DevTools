@@ -19,7 +19,14 @@ import androidx.compose.ui.unit.dp
 import com.example.newsapp.R
 import com.example.newsapp.presentation.ui.theme.AppTheme
 
-
+/**
+ * LanguageOption - Элемент выбора языка в настройках.
+ *
+ * @param languageCode Код языка ("en", "ru" и т.д.)
+ * @param languageName Название языка
+ * @param isSelected Флаг выбранного состояния
+ * @param onSelect Обработчик выбора языка
+ */
 @Composable
 fun LanguageOption(
     languageCode: String,
@@ -40,6 +47,7 @@ fun LanguageOption(
             else -> R.drawable.ic_flag_unknown
         }
 
+        // Отображение флага языка
         Image(
             painter = painterResource(id = flagIcon),
             contentDescription = null,
@@ -51,16 +59,17 @@ fun LanguageOption(
         Text(
             text = languageName,
             style = MaterialTheme.typography.bodyLarge,
-            color = if (AppTheme.isDarkTheme) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondary
+            color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondary
         )
 
         Spacer(modifier = Modifier.weight(1f))
 
+        // Иконка выбранного состояния
         if (isSelected) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.ic_check),
                 contentDescription = stringResource(R.string.selected),
-                tint = MaterialTheme.colorScheme.primary
+                tint = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondary
             )
 
         }

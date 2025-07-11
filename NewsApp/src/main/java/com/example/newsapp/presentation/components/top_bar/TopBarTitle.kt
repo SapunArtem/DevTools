@@ -6,6 +6,9 @@ import androidx.compose.ui.res.stringResource
 import com.example.newsapp.R
 import com.example.newsapp.presentation.navigation.Screen
 
+/**
+ * TopBarTitle - Заголовок верхней панели в зависимости от текущего экрана.
+ */
 @Composable
 fun TopBarTitle(
     currentRoute: String?

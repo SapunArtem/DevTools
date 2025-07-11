@@ -25,6 +25,11 @@ import com.example.newsapp.presentation.NewsViewModel.NewsViewModel
 import com.example.newsapp.presentation.components.news.NewsList
 import com.example.newsapp.presentation.navigation.Screen
 
+/**
+ * NewsScreen - Экран списка новостей.
+ *
+ * @param navController Контроллер навигации для переходов
+ */
 @Composable
 fun NewsScreen(
     navController: NavController,

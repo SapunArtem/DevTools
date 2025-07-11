@@ -10,6 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.newsapp.data.api.models.Results
 
+/**
+ * NewsList - Список новостных карточек с LazyColumn.
+ *
+ * @param news Список новостей для отображения
+ * @param onNewsClick Обработчик клика по новости (передает ID новости)
+ */
 @Composable
 fun NewsList(
     news: List<Results>,

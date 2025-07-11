@@ -23,6 +23,11 @@ import com.example.newsapp.presentation.navigation.NewsAppNavigation
 import com.example.newsapp.presentation.navigation.Screen
 import java.util.Locale
 
+
+/**
+ * App - Корневой компонент приложения.
+ * Управляет состоянием языка и основной навигацией.
+ */
 @Composable
 fun App() {
     val navController = rememberNavController()
@@ -32,6 +37,7 @@ fun App() {
         mutableStateOf(LocalizationManager.getCurrentLanguage(context))
     }
 
+    // Функция изменения языка
     val setLanguage: (String) -> Unit = { lang ->
         LocalizationManager.setLocale(context, lang)
         currentLanguage = lang
@@ -42,6 +48,7 @@ fun App() {
         }
     }
 
+    // Пересоздание UI при изменении языка
     key(currentLanguage) {
         MainAppContent(
             navController = navController,
@@ -51,6 +58,9 @@ fun App() {
     }
 }
 
+/**
+ * MainAppContent - Основной layout приложения со Scaffold.
+ */
 @Composable
 fun MainAppContent(
     navController: NavHostController,

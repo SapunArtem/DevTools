@@ -24,6 +24,13 @@ import com.example.newsapp.presentation.components.settings.ThemeOption
 import com.example.newsapp.presentation.ui.theme.AlmostBack
 import com.example.newsapp.presentation.ui.theme.AppTheme
 
+
+/**
+ * SettingsScreen - Экран настроек приложения.
+ *
+ * @param currentLanguage Текущий язык приложения
+ * @param setLanguage Функция для изменения языка
+ */
 @Composable
 fun SettingsScreen(
     currentLanguage: String,
@@ -52,6 +59,7 @@ fun SettingsScreen(
                 Row(
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
+                    //Светлая тема
                     ThemeOption(
                         imageRes = R.drawable.my_lightfon,
                         title = stringResource(R.string.light_theme),
@@ -59,6 +67,8 @@ fun SettingsScreen(
                         onSelect = { AppTheme.isDarkTheme = false }
                     )
                     Spacer(modifier = Modifier.width(10.dp))
+
+                    //Темная тема
                     ThemeOption(
                         imageRes = R.drawable.my_darkfon,
                         title = stringResource(R.string.dark_theme),
@@ -71,6 +81,7 @@ fun SettingsScreen(
 
         Spacer(modifier = Modifier.height(15.dp))
 
+        // Настройки языка
         Text(
             text = stringResource(R.string.app_language),
             color = MaterialTheme.colorScheme.secondary
@@ -85,6 +96,7 @@ fun SettingsScreen(
             elevation = CardDefaults.cardElevation(2.dp)
         ) {
             Column {
+                //Английский язык
                 LanguageOption(
                     languageCode = "en",
                     languageName = stringResource(R.string.english),
@@ -94,6 +106,7 @@ fun SettingsScreen(
 
                 HorizontalDivider()
 
+                //Русский язык
                 LanguageOption(
                     languageCode = "ru",
                     languageName = stringResource(R.string.russian),

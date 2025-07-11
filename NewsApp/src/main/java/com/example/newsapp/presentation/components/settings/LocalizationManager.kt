@@ -6,16 +6,23 @@ import android.os.Build
 import android.os.LocaleList
 import java.util.Locale
 
+/**
+ * LocalizationManager - Менеджер для работы с локализацией приложения.
+ */
 object LocalizationManager {
     private const val PREF_LANGUAGE = "pref_language"
     private const val PREF_NAME = "app_settings"
 
-
+    /**
+     * Устанавливает язык приложения.
+     */
     fun setLocale(context: Context, languageCode: String) {
         persistLanguage(context, languageCode)
         updateResources(context, languageCode)
     }
-
+    /**
+     * Получает текущий язык приложения.
+     */
     fun getCurrentLanguage(context: Context): String {
         val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return sharedPref.getString(PREF_LANGUAGE, Locale.getDefault().language) ?: "en"

@@ -13,6 +13,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.newsapp.R
 
+/**
+ * TopBar - Верхняя панель приложения с кнопкой назад.
+ *
+ * @param currentRoute Текущий маршрут для определения заголовка
+ * @param showBackButton Флаг отображения кнопки "назад"
+ * @param navController Контроллер навигации
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(

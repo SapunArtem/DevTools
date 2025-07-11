@@ -11,7 +11,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 
-
+/**
+ * BottomBar - Компонент нижней навигационной панели приложения.
+ *
+ * @param navController Контроллер навигации для управления переходами между экранами
+ * @param currentRoute Текущий маршрут/экран для определения активного элемента
+ */
 @Composable
 fun BottomBar(
     navController: NavController,
@@ -25,6 +30,7 @@ fun BottomBar(
             NavigationBarItem(
                 selected = currentRoute == bottomItem.route,
                 onClick = {
+                    // Навигация с сохранением состояния стека
                     navController.navigate(bottomItem.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
@@ -41,6 +47,7 @@ fun BottomBar(
                 },
                 label = { Text(text = stringResource(id = bottomItem.title)) },
                 colors = NavigationBarItemColors(
+                    // Цвета для различных состояний элемента
                     selectedIndicatorColor = MaterialTheme.colorScheme.tertiary,
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
                     selectedTextColor = MaterialTheme.colorScheme.secondary,

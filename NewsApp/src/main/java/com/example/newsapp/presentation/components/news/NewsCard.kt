@@ -28,6 +28,12 @@ import com.example.newsapp.data.api.models.Results
 import com.example.newsapp.presentation.ui.theme.Description
 import com.example.newsapp.presentation.ui.theme.NewsNameInCard
 
+/**
+ * NewsCard - Карточка для отображения новости.
+ *
+ * @param newsItem Данные новости (Results)
+ * @param onNewsClick Обработчик клика по карточке
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun NewsCard(
@@ -47,6 +53,7 @@ fun NewsCard(
             modifier = Modifier
                 .padding(16.dp)
         ) {
+            // Изображение новости (используется Glide или дефолтное)
             if (!newsItem.icon.isNullOrEmpty()) {
                 GlideImage(
                     model = newsItem.icon,
@@ -68,6 +75,7 @@ fun NewsCard(
             }
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Описание и описание новости
             Text(
                 text = newsItem.description,
                 style = Description,
@@ -76,6 +84,7 @@ fun NewsCard(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Подпись с названием источника,картинкой и датой
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),

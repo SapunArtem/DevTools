@@ -11,6 +11,11 @@ import com.example.newsapp.presentation.screens.DetailsScreen
 import com.example.newsapp.presentation.screens.NewsScreen
 import com.example.newsapp.presentation.screens.SettingsScreen
 
+/**
+ * Screen - Класс, определяющий маршруты экранов приложения.
+ *
+ * @property route Базовый маршрут экрана
+ */
 sealed class Screen(val route: String) {
     object NewsScreen : Screen("news_screen")
     object SettingsScreen : Screen("settings_screen")
@@ -19,6 +24,14 @@ sealed class Screen(val route: String) {
     }
 }
 
+/**
+ * NewsAppNavigation - Основной навигационный компонент приложения.
+ *
+ * @param navController Контроллер навигации
+ * @param currentLanguage Текущий язык приложения
+ * @param setLanguage Функция для изменения языка
+ * @param modifier Модификатор компоновки
+ */
 @Composable
 fun NewsAppNavigation(
     navController: NavHostController,
@@ -31,17 +44,20 @@ fun NewsAppNavigation(
         startDestination = Screen.NewsScreen.route,
         modifier = modifier
     ) {
+        // Экран новостей
         composable(Screen.NewsScreen.route) {
             NewsScreen(
                 navController = navController
             )
         }
+        // Экран настроек
         composable(Screen.SettingsScreen.route) {
             SettingsScreen(
                 currentLanguage = currentLanguage,
                 setLanguage = setLanguage
             )
         }
+        // Экран деталей с параметром newsId
         composable(
             Screen.DetailsScreen.route,
             arguments = listOf(

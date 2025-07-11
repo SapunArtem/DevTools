@@ -28,12 +28,18 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.newsapp.R
 import com.example.newsapp.presentation.NewsViewModel.DetailsViewModel
 
+/**
+ * DetailsScreen - Экран деталей новости.
+ *
+ * @param newsId Идентификатор новости для отображения
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun DetailsScreen(newsId: String) {
     val viewModel: DetailsViewModel = viewModel()
     val newsItem by viewModel.newsDetails.collectAsState()
 
+    // Загрузка данных при изменении newsId
     LaunchedEffect(key1 = newsId) {
         viewModel.loadNewsDetails(newsId)
     }

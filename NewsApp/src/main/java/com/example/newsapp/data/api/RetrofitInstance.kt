@@ -5,7 +5,15 @@ import retrofit2.Retrofit
 import com.example.newsapp.Utils.Constant.Companion.BASE_URL
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Объект для создания и управления экземпляром Retrofit.
+ * Реализует паттерн Singleton для повторного использования Retrofit.
+ */
 object RetrofitInstance {
+    /**
+     * Ленивая инициализация API сервиса.
+     * Создается при первом обращении и сохраняется для последующих вызовов.
+     */
     val api: NewsServiceApi by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)

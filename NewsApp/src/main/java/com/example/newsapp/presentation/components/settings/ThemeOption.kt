@@ -21,6 +21,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
+/**
+ * ThemeOption - Элемент выбора темы в настройках.
+ *
+ * @param imageRes Ресурс изображения темы
+ * @param title Название темы
+ * @param isSelected Флаг выбранного состояния
+ * @param onSelect Обработчик выбора темы
+ */
 @Composable
 fun ThemeOption(
     imageRes: Int,
@@ -32,6 +40,7 @@ fun ThemeOption(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Изображение темы с рамкой при выборе
         Box(
             modifier = Modifier
                 .padding(4.dp)

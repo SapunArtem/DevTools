@@ -8,11 +8,19 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * DetailsViewModel - ViewModel для экрана деталей новости.
+ * Загружает и хранит данные конкретной новости.
+ */
 class DetailsViewModel : ViewModel() {
     private val repository = NewsRepository()
     private val _newsDetails = MutableStateFlow<Results?>(null)
     val newsDetails: StateFlow<Results?> = _newsDetails
 
+    /**
+     * Загружает детали новости по ID
+     * @param newsId Идентификатор новости
+     */
     fun loadNewsDetails(newsId: String) {
         viewModelScope.launch {
             try {
