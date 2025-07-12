@@ -11,16 +11,16 @@ import com.example.pizzashop.navigation.Screen
 object MenuRepository {
     val menuItems = listOf(
         MenuItem(
-            "Профиль",
-            Screen.MenuProfile.route
+            title = "Профиль",
+            route = Screen.MenuProfile.route
         ),
         MenuItem(
-            "Настройки",
-            Screen.MenuSettings.route
+            title = "Настройки",
+            route = Screen.MenuSettings.route
         ),
         MenuItem(
-            "О приложении",
-            Screen.MenuAboutScreen.route
+            title = "О приложении",
+            route = Screen.MenuAbout.route
         )
     )
 }

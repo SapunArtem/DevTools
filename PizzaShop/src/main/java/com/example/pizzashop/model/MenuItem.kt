@@ -1,5 +1,6 @@
 package com.example.pizzashop.model
 
+
 /**
  * Представляет элемент экрана Menu
  * @property title Название элемента меню

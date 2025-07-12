@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id ("androidx.navigation.safeargs.kotlin")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -41,6 +43,7 @@ android {
 
 dependencies {
 
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)

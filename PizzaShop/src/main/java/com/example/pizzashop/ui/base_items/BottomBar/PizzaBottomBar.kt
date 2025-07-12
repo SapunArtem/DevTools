@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.example.pizzashop.navigation.Screen
 import com.example.pizzashop.repository.BottomNavigatioRepository
 import com.example.pizzashop.ui.theme.Orange
 
@@ -27,7 +26,7 @@ fun PizzaBottomBar(
     NavigationBar {
         BottomNavigatioRepository.navigationItems.forEach { bottomItem ->
             val isSelected = when {
-                bottomItem.route == Screen.MenuRoot.route -> currentRoute?.startsWith("menu_") == true
+                bottomItem.route == "menu_root" -> currentRoute?.startsWith("menu_root") == true
                 else -> currentRoute == bottomItem.route
             }
             NavigationBarItem(

@@ -16,7 +16,7 @@ fun getScreenTitle(
         Screen.MenuMain.route -> Screen.MenuMain.title
         Screen.MenuProfile.route -> Screen.MenuProfile.title
         Screen.MenuSettings.route -> Screen.MenuSettings.title
-        Screen.MenuAboutScreen.route -> Screen.MenuAboutScreen.title
+        Screen.MenuAbout.route -> Screen.MenuAbout.title
         else -> "PizzaShop"
     }
 }
