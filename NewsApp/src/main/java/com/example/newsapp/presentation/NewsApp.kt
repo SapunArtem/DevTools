@@ -29,6 +29,7 @@ class NewsApp : ComponentActivity() {
         }
     }
 
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocalizationManager.wrapContext(newBase))
     }
