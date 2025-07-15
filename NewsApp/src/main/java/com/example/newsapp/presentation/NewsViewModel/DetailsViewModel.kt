@@ -1,5 +1,8 @@
 package com.example.newsapp.presentation.NewsViewModel
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.api.NewsRepository
@@ -7,6 +10,7 @@ import com.example.newsapp.data.api.models.Results
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 /**
  * DetailsViewModel - ViewModel для экрана деталей новости.
@@ -30,5 +34,9 @@ class DetailsViewModel : ViewModel() {
                 println(e.message)
             }
         }
+    }
+    fun openInBrowser(context: Context,url : String){
+        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+        context.startActivity(intent)
     }
 }

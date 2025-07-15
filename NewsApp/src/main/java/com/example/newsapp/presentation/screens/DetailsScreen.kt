@@ -1,5 +1,7 @@
 package com.example.newsapp.presentation.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -27,6 +30,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.newsapp.R
 import com.example.newsapp.presentation.NewsViewModel.DetailsViewModel
+import androidx.core.net.toUri
 
 /**
  * DetailsScreen - Экран деталей новости.
@@ -38,6 +42,7 @@ import com.example.newsapp.presentation.NewsViewModel.DetailsViewModel
 fun DetailsScreen(newsId: String) {
     val viewModel: DetailsViewModel = viewModel()
     val newsItem by viewModel.newsDetails.collectAsState()
+    val context = LocalContext.current
 
     // Загрузка данных при изменении newsId
     LaunchedEffect(key1 = newsId) {
@@ -81,7 +86,9 @@ fun DetailsScreen(newsId: String) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { },
+                onClick = {
+                    viewModel.openInBrowser(context,item.url)
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,
