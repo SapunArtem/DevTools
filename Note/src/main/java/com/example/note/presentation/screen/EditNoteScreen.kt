@@ -29,8 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.note.presentation.ui.theme.AppTheme
 import com.example.note.presentation.ui.theme.ContentTextStyle
 import com.example.note.presentation.ui.theme.DateTextStyle
+import com.example.note.presentation.ui.theme.Orange
 import com.example.note.presentation.ui.theme.TitleTextStyle
 import com.example.note.presentation.viewModel.NotesViewModel
 import java.text.SimpleDateFormat
@@ -145,7 +147,9 @@ fun EditNoteScreen(
                     .onFocusChanged { focusState ->
                         isTitleFocused = focusState.isFocused
                     },
-                textStyle = TitleTextStyle,
+                textStyle = TitleTextStyle.copy(
+                    color = if (AppTheme.isDarkTheme) Orange else Color.Black
+                ),
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
                     unfocusedContainerColor = MaterialTheme.colorScheme.surface,
@@ -175,7 +179,9 @@ fun EditNoteScreen(
                     .onFocusChanged { focusState ->
                         isContentFocused = focusState.isFocused
                     },
-                textStyle = ContentTextStyle,
+                textStyle = ContentTextStyle.copy(
+                    color = if (AppTheme.isDarkTheme) Orange else Color.Black
+                ),
                 minLines = 10,
                 colors = TextFieldDefaults.colors(
                     unfocusedContainerColor = MaterialTheme.colorScheme.surface,
