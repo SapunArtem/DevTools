@@ -7,8 +7,8 @@ package com.example.newsapp.data.api.models
  * @property status Статус запроса ("ok" при успехе, "error" при ошибке)
  * @property totalResults Общее количество доступных результатов
  */
-data class NewsResponse(
-    val results: List<Results>,
+data class NewsResponseDto(
+    val results: List<NewsItemDto>,
     val status: String,
     val totalResults: Int
 )

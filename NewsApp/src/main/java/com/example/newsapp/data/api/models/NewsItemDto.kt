@@ -1,5 +1,7 @@
 package com.example.newsapp.data.api.models
 
+import com.example.newsapp.domain.model.NewsItem
+
 /**
  * Модель данных новостного источника.
  *
@@ -15,7 +17,7 @@ package com.example.newsapp.data.api.models
  * @property total_article Общее количество статей от этого источника
  * @property last_fetch Дата последнего обновления данных (может быть null)
  */
-data class Results(
+data class NewsItemDto(
     val id: String,
     val name: String,
     val url: String,
@@ -28,4 +30,5 @@ data class Results(
     val total_article: Int,
     val last_fetch: String?
 
-)
+) {
+}

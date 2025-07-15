@@ -2,6 +2,7 @@ package com.example.newsapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,6 +11,7 @@ import androidx.navigation.navArgument
 import com.example.newsapp.presentation.screens.DetailsScreen
 import com.example.newsapp.presentation.screens.NewsScreen
 import com.example.newsapp.presentation.screens.SettingsScreen
+import com.example.newsapp.presentation.viewModel.SettingsViewModel
 
 /**
  * Screen - Класс, определяющий маршруты экранов приложения.
@@ -35,8 +37,7 @@ sealed class Screen(val route: String) {
 @Composable
 fun NewsAppNavigation(
     navController: NavHostController,
-    currentLanguage: String,
-    setLanguage: (String) -> Unit,
+    settingsViewModel: SettingsViewModel,
     modifier: Modifier
 ) {
     NavHost(
@@ -46,16 +47,11 @@ fun NewsAppNavigation(
     ) {
         // Экран новостей
         composable(Screen.NewsScreen.route) {
-            NewsScreen(
-                navController = navController
-            )
+            NewsScreen()
         }
         // Экран настроек
         composable(Screen.SettingsScreen.route) {
-            SettingsScreen(
-                currentLanguage = currentLanguage,
-                setLanguage = setLanguage
-            )
+            SettingsScreen(viewModel = settingsViewModel)
         }
         // Экран деталей с параметром newsId
         composable(

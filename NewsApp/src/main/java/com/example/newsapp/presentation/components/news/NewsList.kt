@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.newsapp.data.api.models.Results
+import com.example.newsapp.data.api.models.NewsItemDto
 
 /**
  * NewsList - Список новостных карточек с LazyColumn.
@@ -18,8 +18,9 @@ import com.example.newsapp.data.api.models.Results
  */
 @Composable
 fun NewsList(
-    news: List<Results>,
-    onNewsClick: (String) -> Unit
+    news: List<NewsItemDto>,
+    onNewsClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = Modifier

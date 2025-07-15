@@ -14,15 +14,21 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.newsapp.R
 import com.example.newsapp.presentation.components.settings.LanguageOption
 import com.example.newsapp.presentation.components.settings.ThemeOption
 import com.example.newsapp.presentation.ui.theme.AlmostBack
 import com.example.newsapp.presentation.ui.theme.AppTheme
+import com.example.newsapp.presentation.viewModel.SettingsViewModel
+import com.example.newsapp.presentation.viewModel.SettingsViewModelFactory
 
 
 /**
@@ -32,10 +38,10 @@ import com.example.newsapp.presentation.ui.theme.AppTheme
  * @param setLanguage Функция для изменения языка
  */
 @Composable
-fun SettingsScreen(
-    currentLanguage: String,
-    setLanguage: (String) -> Unit
-) {
+fun SettingsScreen(viewModel: SettingsViewModel) {
+    val currentLanguage by viewModel.currentLanguage.collectAsState()
+    val isDarkTheme by viewModel.isDarkTheme.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,7 +57,7 @@ fun SettingsScreen(
         Card(
             colors = CardDefaults.cardColors(
                 containerColor =
-                    if (!AppTheme.isDarkTheme) Color.White else AlmostBack
+                    if (!isDarkTheme) Color.White else AlmostBack
             ),
             elevation = CardDefaults.cardElevation(2.dp)
         ) {
@@ -63,8 +69,8 @@ fun SettingsScreen(
                     ThemeOption(
                         imageRes = R.drawable.my_lightfon,
                         title = stringResource(R.string.light_theme),
-                        isSelected = !AppTheme.isDarkTheme,
-                        onSelect = { AppTheme.isDarkTheme = false }
+                        isSelected = !isDarkTheme,
+                        onSelect = { viewModel.setTheme(false) }
                     )
                     Spacer(modifier = Modifier.width(10.dp))
 
@@ -72,8 +78,8 @@ fun SettingsScreen(
                     ThemeOption(
                         imageRes = R.drawable.my_darkfon,
                         title = stringResource(R.string.dark_theme),
-                        isSelected = AppTheme.isDarkTheme,
-                        onSelect = { AppTheme.isDarkTheme = true }
+                        isSelected = isDarkTheme,
+                        onSelect = { viewModel.setTheme(true) }
                     )
                 }
             }
@@ -91,7 +97,7 @@ fun SettingsScreen(
 
         Card(
             colors = CardDefaults.cardColors(
-                containerColor = if (!AppTheme.isDarkTheme) Color.White else AlmostBack
+                containerColor = if (!isDarkTheme) Color.White else AlmostBack
             ),
             elevation = CardDefaults.cardElevation(2.dp)
         ) {
@@ -101,7 +107,7 @@ fun SettingsScreen(
                     languageCode = "en",
                     languageName = stringResource(R.string.english),
                     isSelected = currentLanguage == "en",
-                    onSelect = { setLanguage("en") }
+                    onSelect = { viewModel.setLanguage("en") }
                 )
 
                 HorizontalDivider()
@@ -111,7 +117,7 @@ fun SettingsScreen(
                     languageCode = "ru",
                     languageName = stringResource(R.string.russian),
                     isSelected = currentLanguage == "ru",
-                    onSelect = { setLanguage("ru") }
+                    onSelect = { viewModel.setLanguage("ru") }
                 )
             }
         }

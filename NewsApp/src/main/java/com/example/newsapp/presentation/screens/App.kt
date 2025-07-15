@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -13,14 +14,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.example.newsapp.presentation.components.bottom_nav.BottomBar
 import com.example.newsapp.presentation.components.settings.LocalizationManager
 import com.example.newsapp.presentation.components.top_bar.TopBar
 import com.example.newsapp.presentation.navigation.NewsAppNavigation
 import com.example.newsapp.presentation.navigation.Screen
+import com.example.newsapp.presentation.ui.theme.NewsAppTheme
+import com.example.newsapp.presentation.viewModel.SettingsViewModel
+import com.example.newsapp.presentation.viewModel.SettingsViewModelFactory
 import java.util.Locale
 
 
@@ -32,31 +38,22 @@ import java.util.Locale
 fun App() {
     val navController = rememberNavController()
     val context = LocalContext.current
-    val view = LocalView.current
-    var currentLanguage by remember {
-        mutableStateOf(LocalizationManager.getCurrentLanguage(context))
-    }
+    val viewModel : SettingsViewModel = viewModel(factory = SettingsViewModelFactory(context))
+    val isDarkTheme by viewModel.isDarkTheme.collectAsState()
+    val currentLanguage by viewModel.currentLanguage.collectAsState()
 
-    // Функция изменения языка
-    val setLanguage: (String) -> Unit = { lang ->
-        LocalizationManager.setLocale(context, lang)
-        currentLanguage = lang
-        view.post {
-            val config = Configuration(context.resources.configuration)
-            config.setLocale(Locale(lang))
-            context.resources.updateConfiguration(config, context.resources.displayMetrics)
+    key (currentLanguage,isDarkTheme){
+        NewsAppTheme (darkTheme = isDarkTheme){
+            MainAppContent(
+                navController = navController,
+                settingsViewModel = viewModel
+            )
         }
     }
+    }
+
 
     // Пересоздание UI при изменении языка
-    key(currentLanguage) {
-        MainAppContent(
-            navController = navController,
-            currentLanguage = currentLanguage,
-            setLanguage = setLanguage
-        )
-    }
-}
 
 /**
  * MainAppContent - Основной layout приложения со Scaffold.
@@ -64,8 +61,7 @@ fun App() {
 @Composable
 fun MainAppContent(
     navController: NavHostController,
-    currentLanguage: String,
-    setLanguage: (String) -> Unit
+    settingsViewModel: SettingsViewModel
 ) {
 
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -84,8 +80,7 @@ fun MainAppContent(
         content = { padding ->
             NewsAppNavigation(
                 navController = navController,
-                currentLanguage = currentLanguage,
-                setLanguage = setLanguage,
+                settingsViewModel = settingsViewModel,
                 modifier = Modifier
                     .padding(padding)
             )

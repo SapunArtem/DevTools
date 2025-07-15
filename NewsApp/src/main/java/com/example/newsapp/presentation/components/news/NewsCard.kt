@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.newsapp.R
-import com.example.newsapp.data.api.models.Results
+import com.example.newsapp.data.api.models.NewsItemDto
 import com.example.newsapp.presentation.ui.theme.Description
 import com.example.newsapp.presentation.ui.theme.NewsNameInCard
 
@@ -37,7 +37,7 @@ import com.example.newsapp.presentation.ui.theme.NewsNameInCard
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun NewsCard(
-    newsItem: Results,
+    newsItem: NewsItemDto,
     onNewsClick: () -> Unit
 ) {
     Card(

@@ -19,11 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.newsapp.R
-import com.example.newsapp.presentation.NewsViewModel.NewsViewModel
+import com.example.newsapp.data.mapper.toDto
+import com.example.newsapp.presentation.viewModel.NewsViewModel
 import com.example.newsapp.presentation.components.news.NewsList
 import com.example.newsapp.presentation.navigation.Screen
+import com.example.newsapp.presentation.viewModel.NewsListState
 
 /**
  * NewsScreen - Экран списка новостей.
@@ -32,55 +33,38 @@ import com.example.newsapp.presentation.navigation.Screen
  */
 @Composable
 fun NewsScreen(
-    navController: NavController,
+    viewModel: NewsViewModel = viewModel(),
+    onNewsClick : (String) -> Unit = {}
 ) {
-    val viewModel: NewsViewModel = viewModel()
-    val news by viewModel.newsState.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    val error by viewModel.error.collectAsState()
+    val newsState by viewModel.newsListState.collectAsState()
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        when {
-            isLoading -> {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+
+
+    when(val state = newsState){
+        is NewsListState.Loading ->{
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
             }
-
-            error != null -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "${stringResource(R.string.error)} $error",
-                        color = MaterialTheme.colorScheme.error
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = { viewModel.loadNews() }) {
-                        Text(text = stringResource(R.string.retry))
-                    }
-                }
-            }
-
-            news.isEmpty() -> {
-                Text(
-                    text = stringResource(R.string.no_news_found),
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-
-            else -> {
-                NewsList(
-                    news = news,
-                    onNewsClick = { newsId ->
-                        navController.navigate(Screen.DetailsScreen.createRoute(newsId))
-                    }
-                )
+            viewModel.loadNews()
+        }
+        is NewsListState.Success ->{
+            NewsList(
+                news = state.news.map { it.toDto() },
+                onNewsClick = onNewsClick,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        is NewsListState.Error ->{
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(text = state.message)
             }
         }
     }
