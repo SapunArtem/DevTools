@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,6 +32,7 @@ import com.example.newsapp.presentation.navigation.Screen
  *
  * @param navController Контроллер навигации для переходов
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(
     navController: NavController,
@@ -38,6 +41,8 @@ fun NewsScreen(
     val news by viewModel.newsState.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val error by viewModel.error.collectAsState()
+
+
 
     Box(
         modifier = Modifier
@@ -75,12 +80,28 @@ fun NewsScreen(
             }
 
             else -> {
-                NewsList(
-                    news = news,
-                    onNewsClick = { newsId ->
-                        navController.navigate(Screen.DetailsScreen.createRoute(newsId))
+                PullToRefreshBox(
+                    isRefreshing = isLoading,
+                    onRefresh = { viewModel.loadNews() },
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    if (news.isEmpty()) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Text(
+                                text = stringResource(R.string.no_news_found),
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    } else {
+                        NewsList(
+                            news = news,
+                            onNewsClick = { newsId ->
+                                navController.navigate(Screen.DetailsScreen.createRoute(newsId))
+                            }
+                        )
                     }
-                )
+                }
+
             }
         }
     }

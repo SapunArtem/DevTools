@@ -1,4 +1,4 @@
-package com.example.newsapp.presentation.components.settings
+package com.example.newsapp.presentation.components.settings.app_language
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -17,20 +17,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.newsapp.R
-import com.example.newsapp.presentation.ui.theme.AppTheme
+import com.example.newsapp.presentation.components.settings.SettingsItem
 
 /**
- * LanguageOption - Элемент выбора языка в настройках.
+ * Отображает одну опцию языка с флагом и названием.
  *
- * @param languageCode Код языка ("en", "ru" и т.д.)
- * @param languageName Название языка
- * @param isSelected Флаг выбранного состояния
- * @param onSelect Обработчик выбора языка
+ * @param item - элемент языка
+ * @param isSelected - выбран ли текущий язык
+ * @param onSelect - действие при выборе
  */
 @Composable
 fun LanguageOption(
-    languageCode: String,
-    languageName: String,
+    item: SettingsItem.LanguageSetting,
     isSelected: Boolean,
     onSelect: () -> Unit
 ) {
@@ -41,15 +39,10 @@ fun LanguageOption(
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val flagIcon = when (languageCode) {
-            "en" -> R.drawable.ic_flag_uk
-            "ru" -> R.drawable.ic_flag_russia
-            else -> R.drawable.ic_flag_unknown
-        }
 
         // Отображение флага языка
         Image(
-            painter = painterResource(id = flagIcon),
+            painter = painterResource(id = item.flagRes),
             contentDescription = null,
             modifier = Modifier.size(24.dp)
         )
@@ -57,7 +50,7 @@ fun LanguageOption(
         Spacer(modifier = Modifier.width(16.dp))
 
         Text(
-            text = languageName,
+            text = stringResource(id = item.titleRes),
             style = MaterialTheme.typography.bodyLarge,
             color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondary
         )

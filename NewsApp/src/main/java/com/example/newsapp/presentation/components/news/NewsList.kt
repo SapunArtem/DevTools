@@ -21,6 +21,7 @@ fun NewsList(
     news: List<Results>,
     onNewsClick: (String) -> Unit
 ) {
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),

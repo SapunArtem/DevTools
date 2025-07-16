@@ -1,4 +1,4 @@
-package com.example.newsapp.presentation.components.settings
+package com.example.newsapp.presentation.components.settings.app_language
 
 import android.content.Context
 import android.content.res.Configuration
@@ -20,6 +20,7 @@ object LocalizationManager {
         persistLanguage(context, languageCode)
         updateResources(context, languageCode)
     }
+
     /**
      * Получает текущий язык приложения.
      */

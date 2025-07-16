@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newsapp.presentation.components.bottom_nav.BottomBar
-import com.example.newsapp.presentation.components.settings.LocalizationManager
+import com.example.newsapp.presentation.components.settings.app_language.LocalizationManager
 import com.example.newsapp.presentation.components.top_bar.TopBar
 import com.example.newsapp.presentation.navigation.NewsAppNavigation
 import com.example.newsapp.presentation.navigation.Screen
