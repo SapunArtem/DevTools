@@ -51,19 +51,12 @@
 
 ```./gradlew build```
 
-**Cтандартная сборка JAR**
-
-```./gradlew jar```
-
 ### Установка через командную строку
 
-**Через Gradle (без сборки JAR)**
+**Через Gradle**
 
 ```./gradlew run```
 
-**Через собранный JAR**
-
-```java -jar build/libs/NewsApp.jar```
 
 ### Установка через GitHub
 
