@@ -1,7 +1,7 @@
 package com.example.newsapp.domain.usecase
 
 import android.content.Context
-import com.example.newsapp.presentation.components.settings.LocalizationManager
+import com.example.newsapp.presentation.components.settings.app_language.LocalizationManager
 
 class ChangeAppLanguageUseCase(
     private val context: Context

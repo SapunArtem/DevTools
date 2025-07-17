@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.newsapp.presentation.components.settings.LocalizationManager
+import com.example.newsapp.presentation.components.settings.app_language.LocalizationManager
 import com.example.newsapp.presentation.screens.App
 import com.example.newsapp.presentation.ui.theme.NewsAppTheme
 

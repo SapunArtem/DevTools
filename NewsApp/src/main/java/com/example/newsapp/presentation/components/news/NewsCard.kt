@@ -43,7 +43,7 @@ fun NewsCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = { onNewsClick() }),
+            .clickable(onClick = onNewsClick),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),

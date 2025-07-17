@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.api.repository.NewsRepositoryImpl
 import com.example.newsapp.domain.model.NewsItem
 import com.example.newsapp.domain.usecase.GetNewsSourcesUseCase
+import com.example.newsapp.presentation.components.error.errorException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -18,6 +19,8 @@ class NewsViewModel(
         NewsRepositoryImpl()
     )
 ) : ViewModel() {
+
+
 
     // Состояние списка новостей
     private val _newsListState = MutableStateFlow<NewsListState>(NewsListState.Loading)
@@ -34,7 +37,7 @@ class NewsViewModel(
             getNewsSources().onSuccess { news->
                 _newsListState.value = NewsListState.Success(news)
             }.onFailure {
-                _newsListState.value = NewsListState.Error(it.message ?: "Unknow error")
+                _newsListState.value = NewsListState.Error(errorException(it.message))
             }
 
         }
@@ -45,5 +48,5 @@ class NewsViewModel(
 sealed class NewsListState{
     object Loading : NewsListState()
     data class Success(val news : List<NewsItem>) : NewsListState()
-    data class Error(val message : String) : NewsListState()
+    data class Error(val message : Int) : NewsListState()
 }

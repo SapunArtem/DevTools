@@ -20,7 +20,6 @@ import com.example.newsapp.data.api.models.NewsItemDto
 fun NewsList(
     news: List<NewsItemDto>,
     onNewsClick: (String) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = Modifier

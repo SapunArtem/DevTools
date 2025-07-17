@@ -1,4 +1,4 @@
-package com.example.newsapp.presentation.components.settings
+package com.example.newsapp.presentation.components.settings.app_theme
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -19,7 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.newsapp.presentation.components.settings.SettingsItem
 
 /**
  * ThemeOption - Элемент выбора темы в настройках.
@@ -31,8 +33,7 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun ThemeOption(
-    imageRes: Int,
-    title: String,
+    item : SettingsItem.ThemeSettings,
     isSelected: Boolean,
     onSelect: () -> Unit
 ) {
@@ -52,7 +53,7 @@ fun ThemeOption(
                 .padding(8.dp)
         ) {
             Image(
-                painter = painterResource(imageRes),
+                painter = painterResource(id = item.imageRes),
                 contentDescription = "title",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -61,7 +62,7 @@ fun ThemeOption(
             )
         }
         Text(
-            text = title,
+            text = stringResource(id = item.titleRes),
             color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondary
         )
         Checkbox(

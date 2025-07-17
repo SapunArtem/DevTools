@@ -11,7 +11,7 @@ class GetNewsDetailsUseCase(
     suspend operator fun invoke(newsId : String) : Result<NewsItem>{
         return withContext(Dispatchers.IO){
              try {
-                val allNews = repository.getNewsSources("ru").getOrThrow()
+                val allNews = repository.getNewsSources().getOrThrow()
                 allNews.firstOrNull{it.id == newsId}?.let { newsItem ->
                     Result.success(newsItem)
                 } ?: Result.failure(Exception("News with id $newsId not found"))

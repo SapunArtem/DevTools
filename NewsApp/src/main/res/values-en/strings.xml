@@ -16,4 +16,15 @@
     <string name="english">English</string>
     <string name="russian">Russian</string>
     <string name="selected">Selected</string>
+
+    <string name="e_400">Invalid request. Check parameters</string>
+    <string name="e_401">Authorization error. Check API key</string>
+    <string name="e_403">Access denied. Problem with access settings</string>
+    <string name="e_409">Duplicate parameters found</string>
+    <string name="e_415">Unsupported data format</string>
+    <string name="e_422">Error in request. Check data</string>
+    <string name="e_429">Too many requests. Wait and try again</string>
+    <string name="e_500">Server error. Try again later</string>
+    <string name="e_nework">Internet connection problems</string>
+    <string name="e_unknown">An unknown error occurred</string>
 </resources>

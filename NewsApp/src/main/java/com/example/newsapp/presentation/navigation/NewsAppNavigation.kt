@@ -2,7 +2,6 @@ package com.example.newsapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -47,7 +46,11 @@ fun NewsAppNavigation(
     ) {
         // Экран новостей
         composable(Screen.NewsScreen.route) {
-            NewsScreen()
+            NewsScreen(
+                onNewsClick = { newsId ->
+                    navController.navigate(Screen.DetailsScreen.createRoute(newsId))
+                }
+            )
         }
         // Экран настроек
         composable(Screen.SettingsScreen.route) {

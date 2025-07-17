@@ -1,21 +1,18 @@
 package com.example.newsapp.presentation.viewModel
 
 import android.content.Context
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.domain.usecase.ChangeAppLanguageUseCase
 import com.example.newsapp.domain.usecase.ChangeAppThemeUseCase
-import com.example.newsapp.presentation.components.settings.LocalizationManager
+import com.example.newsapp.presentation.components.settings.app_language.LocalizationManager
 import com.example.newsapp.presentation.ui.theme.AppTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
-    private val context: Context
+   context: Context
 ): ViewModel() {
     private val changeLanguage = ChangeAppLanguageUseCase(context)
     private val changeTheme = ChangeAppThemeUseCase()

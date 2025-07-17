@@ -1,6 +1,5 @@
 package com.example.newsapp.data.api.models
 
-import com.example.newsapp.domain.model.NewsItem
 
 /**
  * Модель данных новостного источника.
@@ -21,7 +20,7 @@ data class NewsItemDto(
     val id: String,
     val name: String,
     val url: String,
-    val icon: String,
+    val icon: String?,
     val priority: Int,
     val description: String,
     val category: List<String>,
@@ -30,5 +29,4 @@ data class NewsItemDto(
     val total_article: Int,
     val last_fetch: String?
 
-) {
-}
+)

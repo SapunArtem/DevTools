@@ -1,5 +1,8 @@
 package com.example.newsapp.presentation.viewModel
 
+import android.content.Context
+import android.content.Intent
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.api.repository.NewsRepositoryImpl
@@ -30,6 +33,11 @@ class DetailsViewModel : ViewModel() {
                 _newsState.value = NewsDetailsState.Error(it.message ?: "Unknow error")
             }
         }
+    }
+
+    fun openInBrowser(context: Context,uri : String){
+        val intent = Intent(Intent.ACTION_VIEW,uri.toUri())
+        context.startActivity(intent)
     }
 }
 

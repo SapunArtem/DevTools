@@ -6,7 +6,7 @@ import com.example.newsapp.domain.repository.NewsRepository
 class GetNewsSourcesUseCase(
     private val repository: NewsRepository
 ) {
-    suspend operator fun invoke(country : String = "ru"): Result<List<NewsItem>>{
-        return repository.getNewsSources(country)
+    suspend operator fun invoke(): Result<List<NewsItem>>{
+        return repository.getNewsSources()
     }
 }

@@ -15,10 +15,10 @@ import kotlinx.coroutines.withContext
 class NewsRepositoryImpl(
     private val remoteDataSource: NewsRemoteDataSource = NewsRemoteSourceImpl()
 ) : NewsRepository{
-    override suspend fun getNewsSources(country : String) : Result<List<NewsItem>>{
+    override suspend fun getNewsSources() : Result<List<NewsItem>>{
         return withContext(Dispatchers.IO){
             try {
-                val response = remoteDataSource.getNewsSources(country)
+                val response = remoteDataSource.getNewsSources()
                 Result.success(response.results.map { it.toDomain() })
             }catch (e:Exception){
                 Result.failure(e)

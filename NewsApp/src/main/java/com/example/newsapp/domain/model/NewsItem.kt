@@ -4,7 +4,7 @@ data class NewsItem(
     val id: String,
     val name: String,
     val url: String,
-    val icon: String,
+    val icon: String?,
     val priority: Int,
     val description: String,
     val category: List<String>,

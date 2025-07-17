@@ -16,4 +16,15 @@
     <string name="english">Английский</string>
     <string name="russian">Русский</string>
     <string name="selected">Выбрано</string>
+
+    <string name="e_400">Некорректный запрос. Проверьте параметры</string>
+    <string name="e_401">Ошибка авторизации. Проверьте API ключ</string>
+    <string name="e_403">Доступ запрещен. Проблема с настройками доступа</string>
+    <string name="e_409">Обнаружены дублирующиеся параметры</string>
+    <string name="e_415">Неподдерживаемый формат данных</string>
+    <string name="e_422">Ошибка в запросе. Проверьте данные</string>
+    <string name="e_429">Слишком много запросов. Подождите и повторите</string>
+    <string name="e_500">Ошибка сервера. Попробуйте позже</string>
+    <string name="e_nework">Проблемы с интернет-соединением</string>
+    <string name="e_unknown">Произошла неизвестная ошибка</string>
 </resources>
