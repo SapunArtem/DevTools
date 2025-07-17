@@ -11,27 +11,43 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+
+/**
+ * ViewModel для управления настройками приложения (язык, тема).
+ *
+ * @param context контекст для доступа к ресурсам и локализации
+ */
 class SettingsViewModel(
-   context: Context
-): ViewModel() {
+    context: Context
+) : ViewModel() {
     private val changeLanguage = ChangeAppLanguageUseCase(context)
     private val changeTheme = ChangeAppThemeUseCase()
 
     private val _currentLanguage = MutableStateFlow(LocalizationManager.getCurrentLanguage(context))
-    val  currentLanguage : StateFlow<String> = _currentLanguage
+    val currentLanguage: StateFlow<String> = _currentLanguage
 
     private val _isDarkTheme = MutableStateFlow(AppTheme.isDarkTheme)
-    val isDarkTheme : StateFlow<Boolean> = _isDarkTheme
+    val isDarkTheme: StateFlow<Boolean> = _isDarkTheme
 
 
-    fun setLanguage(languageCode : String){
+    /**
+     * Устанавливает выбранный язык приложения.
+     *
+     * @param languageCode код языка (например, "en", "ru")
+     */
+    fun setLanguage(languageCode: String) {
         viewModelScope.launch {
             changeLanguage(languageCode)
             _currentLanguage.value = languageCode
         }
     }
 
-    fun setTheme(isDark: Boolean){
+    /**
+     * Устанавливает выбранную тему (темная/светлая).
+     *
+     * @param isDark true - темная тема, false - светлая
+     */
+    fun setTheme(isDark: Boolean) {
         viewModelScope.launch {
             changeTheme(isDark)
             _isDarkTheme.value = isDark

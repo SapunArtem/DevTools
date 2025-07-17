@@ -26,12 +26,11 @@ sealed class Screen(val route: String) {
 }
 
 /**
- * NewsAppNavigation - Основной навигационный компонент приложения.
+ * Навигация приложения новостей с использованием NavHostController.
  *
- * @param navController Контроллер навигации
- * @param currentLanguage Текущий язык приложения
- * @param setLanguage Функция для изменения языка
- * @param modifier Модификатор компоновки
+ * @param navController контроллер навигации
+ * @param settingsViewModel ViewModel для экрана настроек
+ * @param modifier Modifier для настройки внешнего вида NavHost
  */
 @Composable
 fun NewsAppNavigation(

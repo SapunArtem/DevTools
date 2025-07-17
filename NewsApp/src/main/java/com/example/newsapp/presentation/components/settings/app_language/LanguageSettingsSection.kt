@@ -18,6 +18,13 @@ import com.example.newsapp.presentation.components.settings.SettingsItem
 import com.example.newsapp.presentation.ui.theme.AlmostBack
 import com.example.newsapp.presentation.ui.theme.AppTheme
 
+/**
+ * Секция выбора языка с заголовком, списком языков и обработкой выбора.
+ *
+ * @param items Список доступных языков.
+ * @param currentLanguage Код текущего выбранного языка.
+ * @param setLanguage Функция для установки выбранного языка.
+ */
 @Composable
 fun LanguageSettingSection(
     items: List<SettingsItem.LanguageSettings>,

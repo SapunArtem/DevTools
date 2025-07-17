@@ -23,32 +23,37 @@ import com.example.newsapp.presentation.viewModel.SettingsViewModelFactory
 
 
 /**
- * App - Корневой компонент приложения.
- * Управляет состоянием языка и основной навигацией.
+ * Корневой Composable приложения.
+ * Создает NavController и инициализирует ViewModel настроек.
+ * Применяет текущую тему и язык.
  */
 @Composable
 fun App() {
     val navController = rememberNavController()
     val context = LocalContext.current
-    val viewModel : SettingsViewModel = viewModel(factory = SettingsViewModelFactory(context = context))
+    val viewModel: SettingsViewModel =
+        viewModel(factory = SettingsViewModelFactory(context = context))
     val isDarkTheme by viewModel.isDarkTheme.collectAsState()
     val currentLanguage by viewModel.currentLanguage.collectAsState()
 
-    key (currentLanguage,isDarkTheme){
-        NewsAppTheme (darkTheme = isDarkTheme){
+    key(currentLanguage, isDarkTheme) {
+        NewsAppTheme(darkTheme = isDarkTheme) {
             MainAppContent(
                 navController = navController,
                 settingsViewModel = viewModel
             )
         }
     }
-    }
+}
 
 
-    // Пересоздание UI при изменении языка
 
 /**
- * MainAppContent - Основной layout приложения со Scaffold.
+ * Основной контент приложения с Scaffold, который содержит
+ * TopBar, BottomBar и навигацию по экрану.
+ *
+ * @param navController контроллер навигации
+ * @param settingsViewModel ViewModel настроек
  */
 @Composable
 fun MainAppContent(

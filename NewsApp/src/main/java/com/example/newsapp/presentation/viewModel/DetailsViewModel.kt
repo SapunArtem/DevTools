@@ -13,8 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /**
- * DetailsViewModel - ViewModel для экрана деталей новости.
- * Загружает и хранит данные конкретной новости.
+ * ViewModel для загрузки деталей новости и управления состоянием.
  */
 class DetailsViewModel : ViewModel() {
     private val getNewsDetails = GetNewsDetailsUseCase(
@@ -24,10 +23,15 @@ class DetailsViewModel : ViewModel() {
     private val _newsState = MutableStateFlow<NewsDetailsState>(NewsDetailsState.Loading)
     val newsState: StateFlow<NewsDetailsState> = _newsState
 
-    fun loadNewsDetails(newsId : String){
+    /**
+     * Загружает детали новости по идентификатору.
+     *
+     * @param newsId идентификатор новости
+     */
+    fun loadNewsDetails(newsId: String) {
         viewModelScope.launch {
             _newsState.value = NewsDetailsState.Loading
-            getNewsDetails(newsId).onSuccess { news->
+            getNewsDetails(newsId).onSuccess { news ->
                 _newsState.value = NewsDetailsState.Success(news)
             }.onFailure {
                 _newsState.value = NewsDetailsState.Error(it.message ?: "Unknow error")
@@ -35,14 +39,23 @@ class DetailsViewModel : ViewModel() {
         }
     }
 
-    fun openInBrowser(context: Context,uri : String){
-        val intent = Intent(Intent.ACTION_VIEW,uri.toUri())
+    /**
+     * Открывает ссылку новости в браузере.
+     *
+     * @param context контекст для запуска Intent
+     * @param uri URL новости
+     */
+    fun openInBrowser(context: Context, uri: String) {
+        val intent = Intent(Intent.ACTION_VIEW, uri.toUri())
         context.startActivity(intent)
     }
 }
 
-sealed class NewsDetailsState{
+/**
+ * Состояния экрана деталей новости.
+ */
+sealed class NewsDetailsState {
     object Loading : NewsDetailsState()
-    data class Success(val news : NewsItem) : NewsDetailsState()
-    data class Error(val message : String) : NewsDetailsState()
+    data class Success(val news: NewsItem) : NewsDetailsState()
+    data class Error(val message: String) : NewsDetailsState()
 }

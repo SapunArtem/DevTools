@@ -5,9 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 
-class SettingsViewModelFactory (
+/**
+ * Factory для создания SettingsViewModel с передачей контекста.
+ *
+ * @param context контекст приложения
+ */
+class SettingsViewModelFactory(
     private val context: Context
-    ) : ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {

@@ -33,13 +33,16 @@ import com.example.newsapp.presentation.components.news.NewsList
 import com.example.newsapp.presentation.viewModel.NewsListState
 
 /**
- * NewsScreen - Экран списка новостей.
+ * Экран со списком новостей.
+ *
+ * @param viewModel ViewModel для управления списком новостей
+ * @param onNewsClick функция обратного вызова при клике на новость, передает newsId
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(
     viewModel: NewsViewModel = viewModel(),
-    onNewsClick : (String) -> Unit = {}
+    onNewsClick: (String) -> Unit = {}
 ) {
     var isRefreshing by remember { mutableStateOf(false) }
     val newsState by viewModel.newsListState.collectAsState()
@@ -73,11 +76,11 @@ fun NewsScreen(
 
             is NewsListState.Success -> {
 
-                    NewsList(
-                        news = state.news.map { it.toDto() },
-                        onNewsClick = onNewsClick,
-                    )
-                }
+                NewsList(
+                    news = state.news.map { it.toDto() },
+                    onNewsClick = onNewsClick,
+                )
+            }
 
             is NewsListState.Error -> {
                 LazyColumn(

@@ -20,6 +20,7 @@ object LocalizationManager {
         persistLanguage(context, languageCode)
         updateResources(context, languageCode)
     }
+
     /**
      * Получает текущий язык приложения.
      */

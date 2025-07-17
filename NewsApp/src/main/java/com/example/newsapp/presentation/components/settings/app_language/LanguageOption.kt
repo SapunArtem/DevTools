@@ -20,16 +20,15 @@ import com.example.newsapp.R
 import com.example.newsapp.presentation.components.settings.SettingsItem
 
 /**
- * LanguageOption - Элемент выбора языка в настройках.
+ * Отображает один пункт выбора языка с флагом, названием и иконкой выбранного состояния.
  *
- * @param languageCode Код языка ("en", "ru" и т.д.)
- * @param languageName Название языка
- * @param isSelected Флаг выбранного состояния
- * @param onSelect Обработчик выбора языка
+ * @param item Объект с данными о языке.
+ * @param isSelected Флаг, выбран ли этот язык.
+ * @param onSelect Лямбда, вызываемая при выборе языка.
  */
 @Composable
 fun LanguageOption(
-    item : SettingsItem.LanguageSettings,
+    item: SettingsItem.LanguageSettings,
     isSelected: Boolean,
     onSelect: () -> Unit
 ) {
@@ -59,7 +58,7 @@ fun LanguageOption(
         Spacer(modifier = Modifier.weight(1f))
 
         // Иконка выбранного состояния
-        if(isSelected) {
+        if (isSelected) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.ic_check),
                 contentDescription = stringResource(R.string.selected),

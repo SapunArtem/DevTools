@@ -17,14 +17,21 @@ import com.example.newsapp.presentation.components.settings.SettingsData
 import com.example.newsapp.presentation.components.settings.SettingsItem
 import com.example.newsapp.presentation.ui.theme.AlmostBack
 
+/**
+ * Секция настроек темы с заголовком и выбором между светлой и темной темами.
+ *
+ * @param items Список доступных тем.
+ * @param isDarkTheme Текущая выбранная тема (true — тёмная).
+ * @param setTheme Функция для изменения темы.
+ */
 @Composable
 fun ThemeSettingsSection(
     items: List<SettingsItem.ThemeSettings>,
-    isDarkTheme : Boolean,
-    setTheme:(Boolean)->Unit
+    isDarkTheme: Boolean,
+    setTheme: (Boolean) -> Unit
 
 
-    ) {
+) {
 
     Text(
         text = stringResource(SettingsData.themeHeader.titleRes),
@@ -41,9 +48,9 @@ fun ThemeSettingsSection(
         Row(
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            items.forEach{item->
+            items.forEach { item ->
                 ThemeOption(
-                    item= item,
+                    item = item,
                     isSelected = isDarkTheme == item.isDarkTheme,
                     onSelect = { setTheme(item.isDarkTheme) }
                 )

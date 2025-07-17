@@ -24,16 +24,15 @@ import androidx.compose.ui.unit.dp
 import com.example.newsapp.presentation.components.settings.SettingsItem
 
 /**
- * ThemeOption - Элемент выбора темы в настройках.
+ * Отображает один пункт выбора темы с изображением, названием и чекбоксом.
  *
- * @param imageRes Ресурс изображения темы
- * @param title Название темы
- * @param isSelected Флаг выбранного состояния
- * @param onSelect Обработчик выбора темы
+ * @param item Объект с данными о теме.
+ * @param isSelected Флаг, выбрана ли эта тема.
+ * @param onSelect Лямбда, вызываемая при выборе темы.
  */
 @Composable
 fun ThemeOption(
-    item : SettingsItem.ThemeSettings,
+    item: SettingsItem.ThemeSettings,
     isSelected: Boolean,
     onSelect: () -> Unit
 ) {

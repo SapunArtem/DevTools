@@ -2,6 +2,10 @@ package com.example.newsapp.presentation.components.settings
 
 import com.example.newsapp.R
 
+/**
+ * Объект, содержащий данные для настроек приложения:
+ * темы и языки, а также заголовки секций.
+ */
 object SettingsData {
     val theme = listOf(
         SettingsItem.ThemeSettings(

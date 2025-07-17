@@ -16,10 +16,9 @@ import com.example.newsapp.presentation.viewModel.SettingsViewModel
 
 
 /**
- * SettingsScreen - Экран настроек приложения.
+ * Экран настроек приложения.
  *
- * @param currentLanguage Текущий язык приложения
- * @param setLanguage Функция для изменения языка
+ * @param viewModel ViewModel для управления настройками
  */
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel) {
@@ -36,16 +35,18 @@ fun SettingsScreen(viewModel: SettingsViewModel) {
             ThemeSettingsSection(
                 items = SettingsData.theme,
                 isDarkTheme = isDarkTheme,
-                setTheme = {selectedTheme->
-                    viewModel.setTheme(selectedTheme)}
+                setTheme = { selectedTheme ->
+                    viewModel.setTheme(selectedTheme)
+                }
             )
         }
         item {
             LanguageSettingSection(
                 items = SettingsData.language,
                 currentLanguage = currentLanguage,
-                setLanguage = { selectedLanguage->
-                    viewModel.setLanguage(selectedLanguage) }
+                setLanguage = { selectedLanguage ->
+                    viewModel.setLanguage(selectedLanguage)
+                }
             )
         }
     }

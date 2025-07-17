@@ -31,16 +31,17 @@ import com.example.newsapp.presentation.viewModel.DetailsViewModel
 import com.example.newsapp.presentation.viewModel.NewsDetailsState
 
 /**
- * DetailsScreen - Экран деталей новости.
+ * Экран с деталями новости.
  *
- * @param newsId Идентификатор новости для отображения
+ * @param newsId идентификатор новости для загрузки деталей
+ * @param viewModel ViewModel для управления состоянием деталей новости
  */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun DetailsScreen(
     newsId: String,
     viewModel: DetailsViewModel = viewModel()
-    ) {
+) {
     val newsState by viewModel.newsState.collectAsState()
     val context = LocalContext.current
 
@@ -48,16 +49,17 @@ fun DetailsScreen(
     LaunchedEffect(key1 = newsId) {
         viewModel.loadNewsDetails(newsId)
     }
-    when(val state = newsState){
-        is NewsDetailsState.Loading ->{
+    when (val state = newsState) {
+        is NewsDetailsState.Loading -> {
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center
-            ){
+            ) {
                 CircularProgressIndicator()
             }
         }
+
         is NewsDetailsState.Success -> {
             Column(
                 modifier = Modifier
@@ -97,7 +99,7 @@ fun DetailsScreen(
 
                 Button(
                     onClick = {
-                        viewModel.openInBrowser(context,state.news.url)
+                        viewModel.openInBrowser(context, state.news.url)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
@@ -112,12 +114,13 @@ fun DetailsScreen(
                 }
             }
         }
-        is NewsDetailsState.Error ->{
+
+        is NewsDetailsState.Error -> {
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center
-            ){
+            ) {
                 Text(
                     text = state.message
                 )

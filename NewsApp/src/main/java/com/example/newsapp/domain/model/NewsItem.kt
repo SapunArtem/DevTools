@@ -1,5 +1,20 @@
 package com.example.newsapp.domain.model
 
+/**
+ * Модель данных новостного источника.
+ *
+ * @property id Уникальный идентификатор источника
+ * @property name Название источника
+ * @property url URL веб-сайта источника
+ * @property icon URL иконки источника
+ * @property priority Приоритет источника (для сортировки)
+ * @property description Описание источника
+ * @property category Список категорий источника
+ * @property language Список поддерживаемых языков
+ * @property country Список стран, которые охватывает источник
+ * @property total_article Общее количество статей от этого источника
+ * @property last_fetch Дата последнего обновления данных (может быть null)
+ */
 data class NewsItem(
     val id: String,
     val name: String,
