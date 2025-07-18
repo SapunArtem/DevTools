@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -35,6 +36,9 @@ fun App() {
         viewModel(factory = SettingsViewModelFactory(context = context))
     val isDarkTheme by viewModel.isDarkTheme.collectAsState()
     val currentLanguage by viewModel.currentLanguage.collectAsState()
+
+
+    LaunchedEffect(context) {viewModel.updateContext(context) }
 
     key(currentLanguage, isDarkTheme) {
         NewsAppTheme(darkTheme = isDarkTheme) {

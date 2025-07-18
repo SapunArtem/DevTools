@@ -9,7 +9,7 @@ import com.example.newsapp.presentation.components.settings.app_language.Localiz
  * @property context Контекст приложения.
  */
 class ChangeAppLanguageUseCase(
-    private val context: Context
+    private var context: Context
 ) {
     /**
      * Устанавливает выбранный язык в приложении.
@@ -18,5 +18,17 @@ class ChangeAppLanguageUseCase(
      */
     operator fun invoke(languageCode: String) {
         LocalizationManager.setLocale(context, languageCode)
+    }
+
+/**
+ * Обновляет контекст UseCase.
+ *
+ * Должен вызываться при изменении конфигурации (например, повороте экрана),
+ * чтобы обеспечить актуальность контекста для работы с ресурсами.
+ *
+ * @param newContext Новый контекст активити/фрагмента.
+ */
+    fun updateContext(newContext: Context){
+        context = newContext
     }
 }

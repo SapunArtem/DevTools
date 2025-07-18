@@ -3,6 +3,7 @@ package com.example.newsapp.presentation.components.settings.app_theme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,12 +41,16 @@ fun ThemeSettingsSection(
     Spacer(modifier = Modifier.height(8.dp))
 
     Card(
+        modifier = Modifier
+            .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = if (!isDarkTheme) Color.White else AlmostBack
         ),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Row(
+            modifier = Modifier
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             items.forEach { item ->

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
  * @param context контекст для доступа к ресурсам и локализации
  */
 class SettingsViewModel(
-    context: Context
+    private val context: Context
 ) : ViewModel() {
     private val changeLanguage = ChangeAppLanguageUseCase(context)
     private val changeTheme = ChangeAppThemeUseCase()
@@ -52,5 +52,21 @@ class SettingsViewModel(
             changeTheme(isDark)
             _isDarkTheme.value = isDark
         }
+    }
+
+    /**
+     * Обновляет контекст ViewModel при изменении конфигурации.
+     *
+     * @param newContext Новый контекст после изменения конфигурации
+     */
+    fun updateContext(newContext: Context){
+        changeLanguage.updateContext(newContext)
+        updateLanguage()
+    }
+    /**
+     * Обновляет текущий язык из SharedPreferences.
+     */
+    private fun updateLanguage(){
+        _currentLanguage.value = LocalizationManager.getCurrentLanguage(context = context)
     }
 }
