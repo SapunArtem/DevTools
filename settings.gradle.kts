@@ -24,4 +24,5 @@ rootProject.name = "DevTools"
 include(":ToDoManager")
 include(":CalculatorApp")
 include(":Note")
+include(":PizzaShop")
 
