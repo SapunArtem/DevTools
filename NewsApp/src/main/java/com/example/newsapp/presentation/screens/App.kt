@@ -37,8 +37,9 @@ fun App() {
     val isDarkTheme by viewModel.isDarkTheme.collectAsState()
     val currentLanguage by viewModel.currentLanguage.collectAsState()
 
-
-    LaunchedEffect(context) {viewModel.updateContext(context) }
+    LaunchedEffect(context) {
+        viewModel.updateContext(context)
+    }
 
     key(currentLanguage, isDarkTheme) {
         NewsAppTheme(darkTheme = isDarkTheme) {

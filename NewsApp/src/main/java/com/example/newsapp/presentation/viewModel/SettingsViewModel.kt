@@ -1,12 +1,13 @@
 package com.example.newsapp.presentation.viewModel
 
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newsapp.data.local.repository.LocalizationRepositoryImpl
+import com.example.newsapp.domain.repository.ThemeRepository
 import com.example.newsapp.domain.usecase.ChangeAppLanguageUseCase
 import com.example.newsapp.domain.usecase.ChangeAppThemeUseCase
-import com.example.newsapp.presentation.components.settings.app_language.LocalizationManager
-import com.example.newsapp.presentation.ui.theme.AppTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -14,19 +15,24 @@ import kotlinx.coroutines.launch
 
 /**
  * ViewModel для управления настройками приложения (язык, тема).
+ * Предоставляет состояние и методы для изменения настроек.
  *
- * @param context контекст для доступа к ресурсам и локализации
+ * @property changeLanguage UseCase для изменения языка
+ * @property localizationRepository Репозиторий локализации (реализация)
+ * @property changeTheme UseCase для изменения темы
+ * @property themeRepository Репозиторий темы
  */
 class SettingsViewModel(
-    private val context: Context
+    private val changeLanguage: ChangeAppLanguageUseCase,
+    private val localizationRepository: LocalizationRepositoryImpl,
+    private val changeTheme : ChangeAppThemeUseCase,
+    private val themeRepository: ThemeRepository
 ) : ViewModel() {
-    private val changeLanguage = ChangeAppLanguageUseCase(context)
-    private val changeTheme = ChangeAppThemeUseCase()
 
-    private val _currentLanguage = MutableStateFlow(LocalizationManager.getCurrentLanguage(context))
+    private val _currentLanguage = MutableStateFlow(localizationRepository.getCurrentLanguage())
     val currentLanguage: StateFlow<String> = _currentLanguage
 
-    private val _isDarkTheme = MutableStateFlow(AppTheme.isDarkTheme)
+    private val _isDarkTheme = MutableStateFlow(themeRepository.getCurrentTheme())
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme
 
 
@@ -38,8 +44,16 @@ class SettingsViewModel(
     fun setLanguage(languageCode: String) {
         viewModelScope.launch {
             changeLanguage(languageCode)
-            _currentLanguage.value = languageCode
+            _currentLanguage.value = localizationRepository.getCurrentLanguage()
         }
+    }
+    /**
+     * Обновляет контекст при изменении конфигурации.
+     * @param newContext Новый контекст
+     */
+    fun updateContext(newContext : Context){
+        localizationRepository.updateContext(newContext)
+        _currentLanguage.value = localizationRepository.getCurrentLanguage()
     }
 
     /**
@@ -50,23 +64,8 @@ class SettingsViewModel(
     fun setTheme(isDark: Boolean) {
         viewModelScope.launch {
             changeTheme(isDark)
-            _isDarkTheme.value = isDark
+            _isDarkTheme.value = themeRepository.getCurrentTheme()
         }
     }
 
-    /**
-     * Обновляет контекст ViewModel при изменении конфигурации.
-     *
-     * @param newContext Новый контекст после изменения конфигурации
-     */
-    fun updateContext(newContext: Context){
-        changeLanguage.updateContext(newContext)
-        updateLanguage()
-    }
-    /**
-     * Обновляет текущий язык из SharedPreferences.
-     */
-    private fun updateLanguage(){
-        _currentLanguage.value = LocalizationManager.getCurrentLanguage(context = context)
-    }
 }

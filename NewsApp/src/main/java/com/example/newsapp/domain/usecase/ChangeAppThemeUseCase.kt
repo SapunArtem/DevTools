@@ -1,18 +1,22 @@
 package com.example.newsapp.domain.usecase
 
-import com.example.newsapp.presentation.ui.theme.AppTheme
+import com.example.newsapp.domain.repository.ThemeRepository
 
 
 /**
  * UseCase для изменения темы приложения.
+ *
+ * @property themeRepository Репозиторий для работы с темой
  */
-class ChangeAppThemeUseCase {
+class ChangeAppThemeUseCase(
+    private val themeRepository: ThemeRepository
+) {
     /**
      * Устанавливает тему приложения.
      *
-     * @param isDarkTheme true — тёмная тема, false — светлая тема.
+     * @param isDark true — тёмная тема, false — светлая тема.
      */
-    operator fun invoke(isDarkTheme: Boolean) {
-        AppTheme.isDarkTheme = isDarkTheme
+    operator fun invoke(isDark: Boolean) {
+        themeRepository.setTheme(isDark)
     }
 }

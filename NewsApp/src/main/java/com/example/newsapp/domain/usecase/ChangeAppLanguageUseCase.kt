@@ -1,34 +1,21 @@
 package com.example.newsapp.domain.usecase
 
-import android.content.Context
-import com.example.newsapp.presentation.components.settings.app_language.LocalizationManager
+import com.example.newsapp.domain.repository.LocalizationRepository
 
 /**
  * UseCase для изменения языка приложения.
  *
- * @property context Контекст приложения.
+ * @property localizationRepository Репозиторий для работы с локализацией
  */
 class ChangeAppLanguageUseCase(
-    private var context: Context
+    private val localizationRepository: LocalizationRepository
 ) {
     /**
-     * Устанавливает выбранный язык в приложении.
-     *
-     * @param languageCode Код языка (например, "en", "ru").
+     * Устанавливает указанный язык как текущий для приложения.
+     * @param languageCode Код языка (например, "en", "ru")
      */
     operator fun invoke(languageCode: String) {
-        LocalizationManager.setLocale(context, languageCode)
+        localizationRepository.setLanguage(languageCode)
     }
 
-/**
- * Обновляет контекст UseCase.
- *
- * Должен вызываться при изменении конфигурации (например, повороте экрана),
- * чтобы обеспечить актуальность контекста для работы с ресурсами.
- *
- * @param newContext Новый контекст активити/фрагмента.
- */
-    fun updateContext(newContext: Context){
-        context = newContext
-    }
 }
