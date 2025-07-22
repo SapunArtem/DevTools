@@ -12,6 +12,7 @@ constraintlayout = "2.2.1"
 
 
 [libraries]
+androidx-navigation-testing-android = { group = "androidx.navigation", name = "navigation-testing-android", version.ref = "navigationTestingAndroid" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-rules = { module = "androidx.test:rules", version.ref = "rules" }
