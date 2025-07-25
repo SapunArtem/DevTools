@@ -1,4 +1,4 @@
-package com.example.movieapp.data.models
+package com.example.movieapp.domain.models
 
 data class Country(
     val country : String

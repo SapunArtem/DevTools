@@ -11,16 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.movieapp.data.models.Genre
+import com.example.movieapp.data.models.GenreDto
 import com.example.movieapp.presentation.ui.theme.Orange
 import com.example.movieapp.presentation.ui.theme.White
 
 @Composable
-fun GenreList(genre : List<Genre>){
+fun GenreList(genres: List<GenreDto>){
     Row (
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ){
-        genre.forEach { genre ->
+        genres.forEach { genre ->
             Box(modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .background(Orange)

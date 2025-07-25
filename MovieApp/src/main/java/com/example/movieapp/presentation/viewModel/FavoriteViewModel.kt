@@ -2,27 +2,27 @@ package com.example.movieapp.presentation.viewModel
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.data.models.MovieDetails
-import com.example.movieapp.data.models.MovieItem
+import com.example.movieapp.domain.models.MovieItem
 
-class FavoriteViewModel: ViewModel() {
+class FavoriteViewModel : ViewModel() {
 
     private val _favorites = mutableStateListOf<MovieItem>()
-    val favorites : List<MovieItem> = _favorites
+    val favorites: List<MovieItem> = _favorites
 
 
-    fun addToFavorite(movieItem: MovieItem?){
+    fun addToFavorite(movieItem: MovieItem?) {
         movieItem ?: return
         val existing = _favorites.any { it.kinopoiskId == movieItem.kinopoiskId }
-        if (existing){
-            _favorites.removeAll{it.kinopoiskId == movieItem.kinopoiskId}
-        }else{
+        if (existing) {
+            _favorites.removeAll { it.kinopoiskId == movieItem.kinopoiskId }
+        } else {
             _favorites.add(movieItem)
         }
     }
 
-    fun isFavorite(movieId : Int): Boolean{
-        return _favorites.any{it.kinopoiskId == movieId}
+    fun isFavorite(movieId: Int): Boolean {
+        return _favorites.any { it.kinopoiskId == movieId }
     }
+
 
 }

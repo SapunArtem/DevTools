@@ -11,6 +11,7 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,11 +24,16 @@ import com.example.movieapp.presentation.viewModel.MoviesViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchMovieBar(
-    viewModel: MoviesViewModel
+    onSearch:(String) -> Unit
 ){
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
 
+    LaunchedEffect(query) {
+        if (query.length>2 || query.isEmpty()){
+            onSearch(query)
+        }
+    }
     SearchBar(
         modifier = Modifier
             .fillMaxWidth(),
@@ -36,8 +42,8 @@ fun SearchMovieBar(
                 query = query,
                 onQueryChange = {query = it},
                 onSearch = {
-                    viewModel.searchMovies(query)
                     active = false
+                    onSearch(query)
                 },
                 expanded = active,
                 onExpandedChange = {active = it},

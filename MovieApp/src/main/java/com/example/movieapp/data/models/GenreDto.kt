@@ -1,5 +1,5 @@
 package com.example.movieapp.data.models
 
-data class Genre(
-    val genre: String
+data class GenreDto(
+    val genre : String
 )

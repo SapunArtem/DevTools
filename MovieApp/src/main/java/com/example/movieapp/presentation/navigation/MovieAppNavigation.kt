@@ -46,7 +46,7 @@ fun MovieAppNavigation(
                 navArgument("movieId"){type = NavType.IntType}
             )
         ) { backStackEntry->
-            val movieId = backStackEntry.arguments?.getInt("movieId") ?: -1
+            val movieId = backStackEntry.arguments?.getInt("movieId") ?: return@composable
             DetailsScreen(
                 moviesId = movieId,
                 favoriteViewModel = favoriteViewModel

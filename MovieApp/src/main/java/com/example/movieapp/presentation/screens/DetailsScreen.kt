@@ -41,8 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.movieapp.data.models.MovieDetails
-import com.example.movieapp.data.models.MovieItem
+import com.example.movieapp.data.mapper.toMovieItemDto
 import com.example.movieapp.presentation.components.details.Rating
 import com.example.movieapp.presentation.components.movies.GenreList
 import com.example.movieapp.presentation.components.movies.formatMovieTime
@@ -56,7 +55,8 @@ import com.example.movieapp.presentation.viewModel.FavoriteViewModel
 @Composable
 fun DetailsScreen(
     moviesId : Int,
-    favoriteViewModel: FavoriteViewModel){
+    favoriteViewModel: FavoriteViewModel)
+{
     val viewModel : DetailsViewModel = viewModel()
     val movieDetails by viewModel.moviesDetails.collectAsState()
 
@@ -150,7 +150,7 @@ fun DetailsScreen(
                     }
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    GenreList(genre = item.genres)
+                    GenreList(genres = item.genres)
 
                     Spacer(modifier = Modifier.height(30.dp))
 
@@ -188,7 +188,7 @@ fun DetailsScreen(
                                 .size(50.dp)
                         ) {
                             IconButton(
-                                onClick = {favoriteViewModel.addToFavorite(item.toMovieItem())}
+                                onClick = {favoriteViewModel.addToFavorite(item.toMovieItemDto())}
                             )
                             {
                                 Icon(
@@ -224,21 +224,4 @@ fun DetailsScreen(
         }
 
     }
-fun MovieDetails.toMovieItem(): MovieItem {
-    return MovieItem(
-        kinopoiskId = kinopoiskId,
-        imdbId = imdbId,
-        nameRu = nameRu,
-        nameEn = nameEn,
-        nameOriginal = nameOriginal,
-        countries = countries,
-        genres = genres,
-        ratingKinopoisk = ratingKinopoisk,
-        ratingImdb = ratingImdb,
-        year = year,
-        type = type,
-        posterUrl = posterUrl,
-        posterUrlPreview = posterUrlPreview
-    )
-}
 

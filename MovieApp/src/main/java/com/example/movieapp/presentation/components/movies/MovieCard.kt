@@ -19,14 +19,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.movieapp.data.models.MovieItem
+import com.example.movieapp.data.models.MovieItemDto
+import com.example.movieapp.domain.models.MovieItem
 import com.example.movieapp.presentation.ui.theme.Orange
 import com.example.movieapp.presentation.ui.theme.White
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun MovieCard(
-    movieItem: MovieItem,
+    movieItemDto: MovieItemDto,
     onMovieClick: () -> Unit
 ){
     Card (
@@ -46,15 +47,15 @@ fun MovieCard(
                 )
         ){
             GlideImage(
-                model = movieItem.posterUrlPreview,
-                contentDescription = movieItem.nameRu,
+                model = movieItemDto.posterUrlPreview,
+                contentDescription = movieItemDto.nameRu,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
                     .fillMaxSize()
             )
             Text(
-                text = movieItem.nameEn ?: movieItem.nameRu ?: movieItem.nameOriginal ?: "",
+                text = movieItemDto.nameEn ?: movieItemDto.nameRu ?: movieItemDto.nameOriginal ?: "",
                 color = White,
                 modifier = Modifier
                     .alpha(0.7f)
