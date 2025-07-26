@@ -2,6 +2,34 @@
 <resources>
     <string name="app_name">MovieApp</string>
     <string name="home">Главная</string>
-    <string name="favorite">Понравившиеся</string>
+    <string name="favorite">Избранные</string>
     <string name="profile">Профиль</string>
+    <string name="ok">ОК</string>
+
+    <!-- Movies -->
+    <string name="imdb">IMDB</string>
+    <string name="kinopoisk">Кинопоиск</string>
+    <string name="play">Воспроизвести</string>
+    <string name="description">Описание</string>
+    <string name="reviews">оценок</string>
+    <string name="search">Поиск</string>
+    <string name="movies">Фильмов</string>
+    <string name="rating">Рейтинг</string>
+
+    <string name="settings">Настройки</string>
+    <string name="notifications">Уведомления</string>
+    <string name="app_theme">Тема приложения</string>
+    <string name="my_reviews">Мои отзывы</string>
+    <string name="view_history">История просмотров</string>
+    <string name="log_out">Выйти из аккаунта</string>
+
+    <!-- ifNull -->
+    <string name="null_description">Нет описания для этого фильма</string>
+    <string name="movie_etails_not_available">Поробноти о фильме не доступны</string>
+    <string name="there_are_no_favorites">Избранных нет</string>
+    <string name="movies_not_found">Фильмы не найдены</string>
+
+    <!-- Error -->
+    <string name="error">Ошибка</string>
+    <string name="repeat">Повторить</string>
 </resources>

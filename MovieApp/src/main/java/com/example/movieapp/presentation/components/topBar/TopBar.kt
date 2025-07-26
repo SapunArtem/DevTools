@@ -16,19 +16,19 @@ import com.example.movieapp.presentation.ui.theme.White
 @Composable
 fun TopBar(
     navController: NavController,
-    showBackButton : Boolean = false,
-    showTitle : Boolean = false
-){
+    showBackButton: Boolean = false,
+    showTitle: Boolean = false
+) {
     TopAppBar(
         title = {
-            if (showTitle){
+            if (showTitle) {
                 TopBarTitle()
             }
         },
         navigationIcon = {
-            if (showBackButton){
+            if (showBackButton) {
                 IconButton(
-                    onClick = {navController.popBackStack()}
+                    onClick = { navController.popBackStack() }
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,

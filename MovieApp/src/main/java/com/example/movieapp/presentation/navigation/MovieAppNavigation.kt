@@ -18,8 +18,8 @@ import com.example.movieapp.presentation.viewModel.FavoriteViewModel
 fun MovieAppNavigation(
     navController: NavHostController,
     modifier: Modifier
-){
-    val favoriteViewModel:FavoriteViewModel = viewModel()
+) {
+    val favoriteViewModel: FavoriteViewModel = viewModel()
     NavHost(
         navController = navController,
         startDestination = Screens.Home.route,
@@ -43,9 +43,9 @@ fun MovieAppNavigation(
         composable(
             Screens.Details.route,
             arguments = listOf(
-                navArgument("movieId"){type = NavType.IntType}
+                navArgument("movieId") { type = NavType.IntType }
             )
-        ) { backStackEntry->
+        ) { backStackEntry ->
             val movieId = backStackEntry.arguments?.getInt("movieId") ?: return@composable
             DetailsScreen(
                 moviesId = movieId,

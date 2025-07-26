@@ -16,16 +16,17 @@ import com.example.movieapp.presentation.ui.theme.Orange
 import com.example.movieapp.presentation.ui.theme.White
 
 @Composable
-fun GenreList(genres: List<GenreDto>){
-    Row (
+fun GenreList(genres: List<GenreDto>) {
+    Row(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ){
+    ) {
         genres.forEach { genre ->
-            Box(modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .background(Orange)
-                .padding(8.dp)
-            ){
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Orange)
+                    .padding(8.dp)
+            ) {
                 Text(
                     text = genre.genre,
                     color = White

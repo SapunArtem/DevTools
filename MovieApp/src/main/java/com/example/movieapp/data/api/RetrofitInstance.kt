@@ -10,16 +10,16 @@ object RetrofitInstance {
 
     private val client = OkHttpClient
         .Builder()
-        .addInterceptor{chain ->
+        .addInterceptor { chain ->
             val request = chain.request().newBuilder()
-                .addHeader("X-API-KEY",X_API_KEY)
-                .addHeader("Content-Type","application/json")
+                .addHeader("X-API-KEY", X_API_KEY)
+                .addHeader("Content-Type", "application/json")
                 .build()
             chain.proceed(request)
         }
         .build()
 
-    val api : MoviesServiceApi by lazy {
+    val api: MoviesServiceApi by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)

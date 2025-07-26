@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.movieapp.R
 
 @Composable
-fun TopBarTitle(){
+fun TopBarTitle() {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {

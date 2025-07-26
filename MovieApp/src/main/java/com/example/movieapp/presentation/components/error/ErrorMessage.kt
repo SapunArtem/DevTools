@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.movieapp.R
 import com.example.movieapp.presentation.ui.theme.Orange
 import com.example.movieapp.presentation.ui.theme.White
 
@@ -28,7 +30,7 @@ fun ErrorMessage(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Ошибка: $error",
+            text = "${stringResource(R.string.error)}: $error",
             color = Orange,
             style = MaterialTheme.typography.bodyLarge
         )
@@ -40,7 +42,7 @@ fun ErrorMessage(
                 contentColor = White
             )
         ) {
-            Text("Повторить")
+            Text(text = stringResource(R.string.repeat))
         }
     }
 }

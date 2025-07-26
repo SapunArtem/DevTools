@@ -4,9 +4,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.data.api.MoviesRepositoryImpl
+import com.example.movieapp.data.repository.MoviesRepositoryImpl
 import com.example.movieapp.domain.models.MovieItem
 import com.example.movieapp.domain.useCases.GetMoviesUseCase
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -21,73 +22,83 @@ class MoviesViewModel(
     val state: State<MoviesState> = _state
 
     private val _movies = MutableStateFlow<List<MovieItem>>(emptyList())
-    val movies : StateFlow<List<MovieItem>> = _movies
-
-    private var paginationState = PaginationState()
-        private set
+    val movies: StateFlow<List<MovieItem>> = _movies
 
 
+    private var searchJob: Job? = null
+    private var currentPage = 1
+    private var isMorePages = true
+    private var _lastQuery = MutableStateFlow("")
+    val lastQuery: StateFlow<String> = _lastQuery
 
     init {
-        loadMovies()
+
+        searchMovies("")
     }
 
-    fun loadMovies(keyword:String = "", page: Int = 1) {
-        if (_state.value.isLoading) return
 
-        viewModelScope.launch {
-            _state.value = _state.value.copy(
-                isLoading = true,
-                error = null
-            )
+    fun searchMovies(query: String) {
+        _lastQuery.value = query
+        searchJob?.cancel()
+
+        searchJob = viewModelScope.launch {
+            currentPage = 1
+            isMorePages = true
+            _state.value = _state.value.copy(isLoading = true, error = null)
+
             try {
-                val result = getMoviesUseCase(keyword, page)
-                result.onSuccess { response->
-                    _movies.value = if (page == 1){
-                        response.items
-                    } else {
-                        _movies.value + response.items
+                getMoviesUseCase(query, currentPage)
+                    .onSuccess { response ->
+                        _movies.value = response
+                        isMorePages = response.isNotEmpty()
                     }
-                    paginationState = paginationState.copy(
-                        lastQuery = keyword,
-                        currentPage = page,
-                        totalPages = response.totalPages,
-                        isMorePages = page < response.totalPages
-                    )
-                }.onFailure { e->
-                    _state.value = _state.value.copy(
-                        error = e.message ?: "unknow error"
-                    )
-                }
+                    .onFailure { e ->
+                        _state.value = _state.value.copy(error = e.message ?: "Unknown error")
+                    }
             } finally {
                 _state.value = _state.value.copy(isLoading = false)
             }
-
         }
     }
+
     fun loadNextPage() {
-        if (_state.value.isLoading && paginationState.isMorePages) {
-            loadMovies(
-                keyword = paginationState.lastQuery,
-                page = paginationState.currentPage + 1)
+        if (_state.value.isLoading || !isMorePages) return
+
+        searchJob = viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true)
+            try {
+                getMoviesUseCase(_lastQuery.value, currentPage + 1)
+                    .onSuccess { response ->
+                        _movies.value += response
+                        isMorePages = response.isNotEmpty()
+                        currentPage++
+                    }
+                    .onFailure { e ->
+                        _state.value = _state.value.copy(error = e.message ?: "Unknown error")
+                    }
+            } finally {
+                _state.value = _state.value.copy(isLoading = false)
+            }
         }
     }
 
-    fun searchMovies(query: String) {
-        if (query != paginationState.lastQuery){
-            loadMovies(query,1)
+    fun retry() {
+        if (_movies.value.isEmpty()) {
+            searchMovies(_lastQuery.value)
+        } else {
+            loadNextPage()
         }
     }
-    private data class PaginationState(
-        val lastQuery: String = "",
-        val currentPage: Int = 1,
-        val totalPages: Int = 1,
-        val isMorePages : Boolean = true
-    )
+
 }
+
 data class MoviesState(
-    val isLoading : Boolean = false,
+    val isLoading: Boolean = false,
+    val isLoadingMore: Boolean = false,
     val error: String? = null
 )
+
+
+
 
 

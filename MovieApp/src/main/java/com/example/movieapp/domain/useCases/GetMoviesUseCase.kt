@@ -6,7 +6,7 @@ import com.example.movieapp.domain.repository.MoviesRepository
 class GetMoviesUseCase(
     private val repository: MoviesRepository
 ) {
-    suspend operator fun invoke(keyword:String,page:Int) : Result<List<MovieItem>>{
-        return repository.getMovies(keyword,page)
-        }
+    suspend operator fun invoke(keyword: String, page: Int): Result<List<MovieItem>> {
+        return repository.getMovies(keyword, page)
     }
+}

@@ -13,7 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.movieapp.R
 import com.example.movieapp.presentation.ui.theme.GrayUnselected
 import com.example.movieapp.presentation.ui.theme.Orange
 import com.example.movieapp.presentation.ui.theme.White
@@ -21,7 +23,7 @@ import com.example.movieapp.presentation.ui.theme.White
 
 @Composable
 fun Rating(
-    name:String,
+    name: String,
     rating: Double?,
     count: Int?
 ) {
@@ -41,7 +43,7 @@ fun Rating(
         }
         Spacer(modifier = Modifier.width(2.dp))
         Text(
-            text = "(${count ?: 0} reviews)",
+            text = "(${count ?: 0} ${stringResource(R.string.reviews)})",
             color = GrayUnselected
         )
 

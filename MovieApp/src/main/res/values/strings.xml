@@ -3,4 +3,36 @@
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="profile">Profile</string>
+    <string name="ok">OK</string>
+
+
+    <!-- Movies -->
+    <string name="imdb">IMDB</string>
+    <string name="kinopoisk">Kinopoisk</string>
+    <string name="play">Play Now</string>
+    <string name="description">Description</string>
+    <string name="reviews">reviews</string>
+    <string name="search">Search</string>
+    <string name="movies">Movies</string>
+    <string name="rating">Rating</string>
+
+    <string name="settings">Settings</string>
+    <string name="notifications">Notifications</string>
+    <string name="app_theme">App theme</string>
+    <string name="my_reviews">My reviews</string>
+    <string name="view_history">View history</string>
+    <string name="log_out">Log out</string>
+
+
+
+    <!-- ifNull -->
+    <string name="null_description">No description for this title</string>
+    <string name="movie_etails_not_available">Movie details not available</string>
+    <string name="there_are_no_favorites">There are no favorites</string>
+    <string name="movies_not_found">Movies not found</string>
+
+    <!-- Error -->
+    <string name="error">Error</string>
+    <string name="repeat">Repeat</string>
 </resources>
+

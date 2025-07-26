@@ -14,7 +14,7 @@ import com.example.movieapp.presentation.navigation.MovieAppNavigation
 import com.example.movieapp.presentation.navigation.Screens
 
 @Composable
-fun App(){
+fun App() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
@@ -33,7 +33,7 @@ fun App(){
                 currentRoute = currentRoute
             )
         },
-        content = {padding ->
+        content = { padding ->
             MovieAppNavigation(
                 modifier = Modifier
                     .padding(padding),

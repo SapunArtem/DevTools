@@ -11,7 +11,7 @@ object BottomList {
     val bottomItemsList = listOf(
         BottomItem(
             title = R.string.home,
-            icon =  Icons.Filled.Home,
+            icon = Icons.Filled.Home,
             route = Screens.Home.route
         ),
         BottomItem(

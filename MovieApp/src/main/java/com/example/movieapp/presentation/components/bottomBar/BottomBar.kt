@@ -16,9 +16,9 @@ import com.example.movieapp.presentation.ui.theme.Orange
 
 @Composable
 fun BottomBar(
-    navController : NavController,
-    currentRoute : String?
-){
+    navController: NavController,
+    currentRoute: String?
+) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.background
     ) {
@@ -26,8 +26,8 @@ fun BottomBar(
             NavigationBarItem(
                 selected = currentRoute == bottomItem.route,
                 onClick = {
-                    navController.navigate(bottomItem.route){
-                        popUpTo(navController.graph.findStartDestination().id){
+                    navController.navigate(bottomItem.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         launchSingleTop = true

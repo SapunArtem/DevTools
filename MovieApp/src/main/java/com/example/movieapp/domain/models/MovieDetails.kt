@@ -1,8 +1,5 @@
 package com.example.movieapp.domain.models
 
-import com.example.movieapp.data.models.CountryDto
-import com.example.movieapp.data.models.GenreDto
-
 
 data class MovieDetails(
     val kinopoiskId: Int,
@@ -40,8 +37,8 @@ data class MovieDetails(
     val type: String?,
     val ratingMpaa: String?,
     val ratingAgeLimits: String?,
-    val countries: List<CountryDto>,
-    val genres: List<GenreDto>,
+    val countries: List<Country>,
+    val genres: List<Genre>,
     val startYear: Int?,
     val endYear: Int?,
     val serial: Boolean?,

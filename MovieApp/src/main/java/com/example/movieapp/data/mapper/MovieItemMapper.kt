@@ -4,13 +4,13 @@ import com.example.movieapp.data.models.MovieItemDto
 import com.example.movieapp.domain.models.MovieItem
 
 fun MovieItemDto.toDomain() = MovieItem(
-    kinopoiskId =kinopoiskId,
+    kinopoiskId = kinopoiskId,
     imdbId = imdbId,
     nameRu = nameRu,
     nameEn = nameEn,
     nameOriginal = nameOriginal,
-    countries = countries,
-    genres = genres,
+    countries = countries.map { it.toDomain() },
+    genres = genres.map { it.toDomain() },
     ratingKinopoisk = ratingKinopoisk,
     ratingImdb = ratingImdb,
     year = year,
@@ -25,8 +25,8 @@ fun MovieItem.toDto() = MovieItemDto(
     nameRu = nameRu,
     nameEn = nameEn,
     nameOriginal = nameOriginal,
-    countries = countries,
-    genres = genres,
+    countries = countries.map { it.toDto() },
+    genres = genres.map { it.toDto() },
     ratingKinopoisk = ratingKinopoisk,
     ratingImdb = ratingImdb,
     year = year,

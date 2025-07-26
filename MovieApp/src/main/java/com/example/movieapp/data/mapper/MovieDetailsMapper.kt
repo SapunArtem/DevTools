@@ -48,8 +48,8 @@ fun MovieDetailsDto.toDomain() = MovieDetails(
     hasImax = hasImax,
     has3D = has3D,
     lastSync = lastSync,
-    countries = countries,
-    genres = genres
+    countries = countries.map { it.toDomain() },
+    genres = genres.map { it.toDomain() }
 )
 
 fun MovieDetails.toDto() = MovieDetailsDto(
@@ -88,8 +88,8 @@ fun MovieDetails.toDto() = MovieDetailsDto(
     type = type,
     ratingMpaa = ratingMpaa,
     ratingAgeLimits = ratingAgeLimits,
-    countries = countries,
-    genres = genres,
+    countries = countries.map { it.toDto() },
+    genres = genres.map { it.toDto() },
     startYear = startYear,
     endYear = endYear,
     serial = serial,
@@ -101,7 +101,7 @@ fun MovieDetails.toDto() = MovieDetailsDto(
 )
 
 fun MovieDetails.toMovieItemDto() = MovieItem(
-    kinopoiskId =kinopoiskId,
+    kinopoiskId = kinopoiskId,
     imdbId = imdbId,
     nameRu = nameRu,
     nameEn = nameEn,

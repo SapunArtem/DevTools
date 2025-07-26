@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import com.example.movieapp.presentation.ui.theme.Orange
 
 @Composable
-fun EmptyState() {
+fun EmptyState(text: String) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Фильмы не найдены",
+            text = text,
             color = Orange,
             style = MaterialTheme.typography.titleMedium
         )
